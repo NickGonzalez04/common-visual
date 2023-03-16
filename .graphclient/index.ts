@@ -6223,14 +6223,29 @@ export function getBuiltGraphSDK<TGlobalContext = any, TOperationContext = any>(
 export type TopPoolByTVLQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TopPoolByTVLQuery = { pools: Array<Pick<Pool, 'id' | 'liquidity'>> };
+export type TopPoolByTVLQuery = { pools: Array<(
+    Pick<Pool, 'id' | 'liquidity' | 'volumeUSD' | 'totalValueLockedUSD'>
+    & { token0: Pick<Token, 'id' | 'symbol' | 'name'>, token1: Pick<Token, 'id' | 'symbol' | 'name'> }
+  )> };
 
 
 export const TopPoolByTVLDocument = gql`
     query TopPoolByTVL {
-  pools(first: 5) {
+  pools(orderBy: volumeUSD, orderDirection: desc, first: 10) {
     id
     liquidity
+    volumeUSD
+    totalValueLockedUSD
+    token0 {
+      id
+      symbol
+      name
+    }
+    token1 {
+      id
+      symbol
+      name
+    }
   }
 }
     ` as unknown as DocumentNode<TopPoolByTVLQuery, TopPoolByTVLQueryVariables>;

@@ -1,7 +1,19 @@
 query TopPoolByTVL {
-    pools(first: 5) {
+    pools(orderBy: volumeUSD, orderDirection: desc, first: 10) {
         id
         liquidity
+        volumeUSD
+        totalValueLockedUSD
+        token0 {
+            id
+            symbol
+            name
+        }
+        token1 {
+            id
+            symbol
+            name
+        }
     }
 }
 
