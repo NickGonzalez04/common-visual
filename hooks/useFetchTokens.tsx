@@ -18,7 +18,19 @@ export function useFetchTokens() {
             console.log(error);
             });
     }, []);
+
+
+    const refetchTokens = () => {
+         setIsLoading(true);
+         execute(getTokensDocument, {}).then((response) => {
+            setIsLoading(false);
+            setTokens(response?.data.tokens);
+         })
+         .catch((error) => {
+            console.log(error);
+            });
+      }
     
-    return {tokens, isLoading};
+    return {tokens, isLoading, refetchTokens};
 }
 
