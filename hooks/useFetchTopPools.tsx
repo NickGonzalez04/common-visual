@@ -28,13 +28,15 @@ export interface Pools {
 
 export function useFetchTopPools() {
   const [topPools, setTopPools] = useState<getTopPoolsByTVLQuery[]>([]);
+  const [poolsLoading, setPoolsLoading] = useState<boolean>(false);
   const [topPoolsData, setTopPoolsData] = useState<Pools[]>([]);
   // set isLoading state
 
   useEffect(() => {
-     execute(getTopPoolsByTVLDocument, {}).then((response) => {;
-
-      setTopPools(response?.data.pools);
+    setPoolsLoading(true);
+     execute(getTopPoolsByTVLDocument, {}).then((response) => {
+        setPoolsLoading(false);
+        setTopPools(response?.data.pools);
      }).catch((error) => {
       console.log(error);
       });;
@@ -51,5 +53,5 @@ export function useFetchTopPools() {
   // })
   // console.log(topPoolsData);
 
-  return topPools;
+  return {topPools, poolsLoading };
 }

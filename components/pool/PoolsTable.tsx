@@ -10,19 +10,11 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
-
-import PoolCard from "./PoolCard";
+import priceFormat from "../../utils/priceFormat";
+// import PoolCard from "./PoolCard";
 
 const PoolsTable = ({ topPools }: any) => {
 
-  const formatLiquidity = (liquidity: number) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      notation: "compact",
-      maximumFractionDigits: 1,
-    }).format(liquidity);
-  };
 
   return (
 
@@ -41,8 +33,8 @@ const PoolsTable = ({ topPools }: any) => {
                 <>
                   <Tr>
                     <Td>{pool.token0.symbol ===  "WETH" ? "ETH" : pool.token0.symbol === "WBTC" ? 'BTC': pool.token0.symbol}/{pool.token1.symbol ===  "WETH" ? "ETH" : pool.token1.symbol === "WBTC" ? 'BTC': pool.token1.symbol}</Td>
-                    <Td>{formatLiquidity(pool.totalValueLockedUSD)}</Td>
-                    <Td>{formatLiquidity(pool.poolDayData[0].volumeUSD)}</Td>
+                    <Td>{priceFormat(pool.totalValueLockedUSD)}</Td>
+                    <Td>{priceFormat(pool.poolDayData[0].volumeUSD)}</Td>
                   </Tr>
                 </>
               );

@@ -6,17 +6,19 @@ import {
 
 export function useTokens() {
     const [tokens, setTokens] = useState<getTokensQuery[]>([]);
-    // set isLoading state
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
-         execute(getTokensDocument, {}).then((response) => {;
-        setTokens(response?.data.tokens);
+        setIsLoading(true);
+         execute(getTokensDocument, {}).then((response) => {
+            setIsLoading(false);
+            setTokens(response?.data.tokens);
          })
          .catch((error) => {
             console.log(error);
             });
     }, []);
     
-    return tokens;
+    return {tokens, isLoading};
 }
 
