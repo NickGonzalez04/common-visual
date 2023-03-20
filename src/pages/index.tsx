@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Container, VStack } from '@chakra-ui/react'
+import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel, Container, VStack } from '@chakra-ui/react'
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import PageLayout from "../../components/PageLayout";
@@ -10,12 +10,13 @@ import { useFetchTopPools } from "../../hooks/useFetchTopPools";
 import { useFetchTokens } from "../../hooks/useFetchTokens";
 import { useFetchTransactions } from "../../hooks/useFetchTransactions";
 import TokensTable from "../../components/token/tokenTable";
+import OverView from "../../components/overView";
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const { topPools, poolsLoading, refetchTopPools } = useFetchTopPools();
-  const { tokens, isLoading } = useFetchTokens();
+  const { tokens, isLoading, refetchTokens } = useFetchTokens();
   const { transactions, trnxLoading } = useFetchTransactions();
 
 
@@ -28,22 +29,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>
-        {/* <VStack> */}
-
+        <Container>
           <Tabs colorScheme={"gray"}>
             <TabList>
-              <Tab>Top Pools</Tab>
-              <Tab>Top Tokens</Tab>
+              <Tab>Overview</Tab>
+              <Tab>Pools</Tab>
+              <Tab>Tokens</Tab>
               <Tab>Transactions</Tab>
             </TabList>
           <TabPanels>
+            <TabPanel>
+              <OverView topPools={topPools} tokens={tokens} transactions={transactions}/>
+            </TabPanel>
             <TabPanel><PoolsTable topPools={topPools} poolsLoading={poolsLoading} refetchTopPools={refetchTopPools} /></TabPanel>
-            <TabPanel><TokensTable tokens={tokens} isLoading={isLoading} /></TabPanel>
+            <TabPanel><TokensTable tokens={tokens} isLoading={isLoading} refetchTokens={refetchTokens} /></TabPanel>
             <TabPanel><TransactionsTable transactions={transactions} /></TabPanel>
         </TabPanels>
         </Tabs>
-
-      {/* </VStack> */}
+        </Container>
     </PageLayout>
     </>
   );

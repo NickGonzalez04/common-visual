@@ -2,7 +2,7 @@ import {
   VStack,
   Box,
   Spinner,
-  Icon,
+ 
   Table,
   Thead,
   Tbody,
@@ -16,6 +16,7 @@ import {
   Heading,
   HStack,
 } from "@chakra-ui/react";
+import { RepeatIcon } from "@chakra-ui/icons";
 import priceFormat from "../../utils/priceFormat";
 // import PoolCard from "./PoolCard";
 
@@ -24,15 +25,18 @@ const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }: any) => {
 
   return (
     <Box>
-    <HStack spacing={'24'}>
+    <HStack spacing={'12'} alignItems={'center'}>
     <Heading>Top Pools</Heading>
     <Button 
     isLoading={poolsLoading}
     loadingText="Refreshing"
+    variant={'outline'}
+    spinnerPlacement='end'
     size={'xs'} 
-    onClick={refetchTopPools}>Refresh</Button>
+    onClick={refetchTopPools}>{' '}Refresh</Button>
+    
     </HStack>
-      <TableContainer display={"block"}>
+      <TableContainer>
         <Table variant={"striped"} colorScheme={"gray"} size={"sm"}>
           <Thead>
             <Tr>

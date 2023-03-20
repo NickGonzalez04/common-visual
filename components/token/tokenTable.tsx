@@ -1,5 +1,9 @@
 import {
     VStack,
+    HStack,
+    Box,
+    Button,
+    Heading,
     Table,
     Thead,
     Tbody,
@@ -13,11 +17,22 @@ import {
 import getTokenPriceChange from "../../utils/priceDifference";
 import priceFormat from "../../utils/priceFormat";
   
-  const TokensTable = ({ tokens }: any) => {
+  const TokensTable = ({ tokens, isLoading, refetchTokens }: any) => {
   
 
     return (
-  
+        <Box>
+        <HStack spacing={'12'} alignItems={'center'}>
+        <Heading>All Tokens</Heading>
+        <Button 
+        isLoading={isLoading}
+        loadingText="Refreshing"
+        variant={'outline'}
+        spinnerPlacement='end'
+        size={'xs'} 
+        onClick={refetchTokens}>{' '}Refresh</Button>
+        
+        </HStack>
         <TableContainer display={"block"}>
           <Table variant={"striped"} colorScheme={"gray"} size={"sm"}>
             <Thead>
@@ -48,7 +63,7 @@ import priceFormat from "../../utils/priceFormat";
             </Tbody>
           </Table>
         </TableContainer>
-  
+        </Box>
     );
   };
   

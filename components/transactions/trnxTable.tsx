@@ -1,5 +1,8 @@
 import {
-    VStack,
+    HStack,
+    Heading,
+    Box,
+    Button,
     Table,
     Thead,
     Tbody,
@@ -16,7 +19,18 @@ import {
 
 
     return (
-
+        <Box>
+        <HStack spacing={'12'} alignItems={'center'}>
+        <Heading>Transactions</Heading>
+        <Button 
+        // isLoading={isLoading}
+        loadingText="Refreshing"
+        variant={'outline'}
+        spinnerPlacement='end'
+        size={'xs'} 
+        >{' '}Refresh</Button>
+        
+        </HStack>
         <TableContainer display={"block"}>
           <Table variant={"striped"} colorScheme={"gray"} size={"sm"}>
             <Thead>
@@ -49,6 +63,7 @@ import {
             </Tbody>
             </Table>
         </TableContainer>
+        </Box>
     )
   };
 
