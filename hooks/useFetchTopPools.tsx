@@ -1,15 +1,15 @@
 
 import { useEffect, useState } from 'react';
 import { execute,
-    TopPoolByTVLDocument,
-    TopPoolByTVLQuery } from '../.graphclient';
+    getTopPoolsByTVLDocument,
+    getTopPoolsByTVLQuery } from '../.graphclient';
 
 
 export function useFetchTopPools() {
-  const [topPools, setTopPools] = useState<TopPoolByTVLQuery[]>([]);
+  const [topPools, setTopPools] = useState<getTopPoolsByTVLQuery[]>([]);
 
   useEffect(() => {
-     execute(TopPoolByTVLDocument, {}).then((response) => {;
+     execute(getTopPoolsByTVLDocument, {}).then((response) => {;
       setTopPools(response?.data.pools);
      });
   }, []);
