@@ -2,7 +2,7 @@ query getTopPoolsByTVL {
     pools(orderBy: totalValueLockedUSD, 
     orderDirection: desc, 
     first: 10
-    where: { volumeUSD_gt: 0, totalValueLockedUSD_gt: 0 }) {
+    where: { volumeUSD_gt: 10000, totalValueLockedUSD_gt: 1000000}) {
         token0 {
             id
             symbol
@@ -23,10 +23,10 @@ query getTopPoolsByTVL {
 }
 
 query getTokens {
-    tokens(first: 50, 
+    tokens(first: 10, 
     orderBy: totalValueLockedUSD, 
     orderDirection: desc
-    where: { volumeUSD_gt: 0, totalValueLockedUSD_gt: 0 }) {
+    where: { volumeUSD_gt: 10000, totalValueLockedUSD_gt: 1000000 }) {
         id
         symbol
         name
@@ -39,4 +39,71 @@ query getTokens {
             close  
         }
     }
+}
+
+
+query getTransactions {
+     transactions(first: 10, orderBy: timestamp, orderDirection:desc){
+      id
+      timestamp
+      mints {
+        id
+        transaction {
+          id
+        }
+        token0 {
+          id
+          name
+          symbol
+        }
+        token1 {
+          id
+          name
+          symbol
+        }
+        sender
+        amountUSD
+        amount0
+        amount1
+      }
+      swaps {
+        id
+        transaction {
+          id
+        }
+        token0 {
+          id
+          name
+          symbol
+        }
+        token1 {
+          id
+          name
+          symbol
+        }
+        sender
+        amountUSD
+        amount0
+        amount1
+      }
+      burns {
+        id
+        transaction {
+          id
+        }
+        token0 {
+          id
+          name
+          symbol
+        }
+        token1 {
+          id
+          name
+          symbol
+        }
+        origin
+        amountUSD
+        amount0
+        amount1
+      }
 }

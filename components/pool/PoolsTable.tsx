@@ -40,7 +40,7 @@ const PoolsTable = ({ topPools }: any) => {
               return (
                 <>
                   <Tr>
-                    <Td>{pool.id} {pool.token0.symbol ===  "WETH" ? "ETH" : pool.token0.symbol === "WBTC" ? 'BTC': pool.token0.symbol}/{pool.token1.symbol ===  "WETH" ? "ETH" : pool.token1.symbol === "WBTC" ? 'BTC': pool.token1.symbol}</Td>
+                    <Td>{pool.token0.symbol ===  "WETH" ? "ETH" : pool.token0.symbol === "WBTC" ? 'BTC': pool.token0.symbol}/{pool.token1.symbol ===  "WETH" ? "ETH" : pool.token1.symbol === "WBTC" ? 'BTC': pool.token1.symbol}</Td>
                     <Td>{formatLiquidity(pool.totalValueLockedUSD)}</Td>
                     <Td>{formatLiquidity(pool.poolDayData[0].volumeUSD)}</Td>
                   </Tr>

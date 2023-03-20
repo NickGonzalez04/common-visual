@@ -6259,7 +6259,7 @@ export const getTopPoolsByTVLDocument = gql`
     orderBy: totalValueLockedUSD
     orderDirection: desc
     first: 10
-    where: {volumeUSD_gt: 0, totalValueLockedUSD_gt: 0}
+    where: {volumeUSD_gt: 10000, totalValueLockedUSD_gt: 1000000}
   ) {
     token0 {
       id
@@ -6283,10 +6283,10 @@ export const getTopPoolsByTVLDocument = gql`
 export const getTokensDocument = gql`
     query getTokens {
   tokens(
-    first: 50
+    first: 10
     orderBy: totalValueLockedUSD
     orderDirection: desc
-    where: {volumeUSD_gt: 0, totalValueLockedUSD_gt: 0}
+    where: {volumeUSD_gt: 10000, totalValueLockedUSD_gt: 1000000}
   ) {
     id
     symbol
