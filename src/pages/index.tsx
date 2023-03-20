@@ -3,29 +3,16 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-
-import {
-  execute,
-  TopPoolByTVLDocument,
-  TopPoolByTVLQuery,
-} from "../../.graphclient";
 import PageLayout from "../../components/PageLayout";
-import PoolsTable from "../../components/PoolsTable";
+import PoolsTable from "../../components/pool/PoolsTable";
 import { useFetchTopPools } from "../../hooks/useFetchTopPools";
+import { useTokens } from "../../hooks/useTokens";
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const poolData = useFetchTopPools();
-
-  // Test query for TopPoolByTVL
-  // Returns id, liquidity
-  // useEffect(() => {
-  //   execute(TopPoolByTVLDocument, {}).then((res) => {
-  //     // console.log(res?.data.pools.map((pool: any) => pool.liquidity))
-  //     setData(res?.data.pools);
-  //   });
-  // }, [setData]);
+  const tokenData = useTokens();
 
   return (
     <>

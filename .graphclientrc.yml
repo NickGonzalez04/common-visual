@@ -4,6 +4,10 @@ sources:
     handler: 
       graphql:
         endpoint: https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3
+    transforms:
+      - autoPagination:
+        validateSchema: true # per 'graph-client README on auto-pagination - Validates that the schema source actually contains the required input filters.'
+        limitRecords: 50 # Default is 1000 working with 50 first
 
 documents:
   - ./graphql/visualizer.graphql
