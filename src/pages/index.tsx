@@ -25,7 +25,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>
-        <main className={styles.main}>
+        {/* <main className={styles.main}> */}
           <Tabs variant='enclosed'>
             <TabList>
               <Tab>Top Liquidity Pools</Tab>
@@ -36,7 +36,7 @@ export default function Home() {
             <TabPanel>Top Tokens</TabPanel>
         </TabPanels>
         </Tabs>
-        </main>
+        {/* </main> */}
       </PageLayout>
     </>
   );

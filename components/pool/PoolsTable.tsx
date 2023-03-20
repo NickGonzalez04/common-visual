@@ -15,7 +15,6 @@ import PoolCard from "./PoolCard";
 
 const PoolsTable = ({ topPools }: any) => {
 
-
   const formatLiquidity = (liquidity: number) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -26,9 +25,9 @@ const PoolsTable = ({ topPools }: any) => {
   };
 
   return (
-    <VStack>
-      <TableContainer>
-        <Table variant="simple" size='lg'>
+
+      <TableContainer display={"block"}>
+        <Table variant={"striped"} colorScheme={"gray"} size={"md"}>
           <Thead>
             <Tr>
               <Th>Pools</Th>
@@ -38,7 +37,6 @@ const PoolsTable = ({ topPools }: any) => {
           </Thead>
           <Tbody>
             {topPools.map((pool: any, index: number) => {
-                console.log("pool", pool)
               return (
                 <>
                   <Tr>
@@ -52,7 +50,7 @@ const PoolsTable = ({ topPools }: any) => {
           </Tbody>
         </Table>
       </TableContainer>
-    </VStack>
+
   );
 };
 
