@@ -33,10 +33,12 @@ export default function Home() {
             <TabList>
               <Tab>Top Liquidity Pools</Tab>
               <Tab>Top Tokens</Tab>
+              <Tab>Transactions</Tab>
             </TabList>
           <TabPanels>
             <TabPanel><PoolsTable topPools={topPools} poolsLoading={poolsLoading} /></TabPanel>
             <TabPanel><TokensTable tokens={tokens} isLoading={isLoading} /></TabPanel>
+            <TabPanel>Transactions</TabPanel>
         </TabPanels>
         </Tabs>
 

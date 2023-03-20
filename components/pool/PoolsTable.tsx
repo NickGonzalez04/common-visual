@@ -19,7 +19,7 @@ const PoolsTable = ({ topPools }: any) => {
   return (
 
       <TableContainer display={"block"}>
-        <Table variant={"striped"} colorScheme={"gray"} size={"md"}>
+        <Table variant={"striped"} colorScheme={"gray"} size={"sm"}>
           <Thead>
             <Tr>
               <Th>Pools</Th>
@@ -28,7 +28,8 @@ const PoolsTable = ({ topPools }: any) => {
             </Tr>
           </Thead>
           <Tbody>
-            {topPools.map((pool: any, index: number) => {
+            {topPools &&
+                topPools.map((pool: any, index: number) => {
               return (
                 <>
                   <Tr>

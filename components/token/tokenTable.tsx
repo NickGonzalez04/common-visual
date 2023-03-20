@@ -10,7 +10,7 @@ import {
     TableCaption,
     TableContainer,
   } from "@chakra-ui/react";
-import getTokenPriceChange from "../../utils/tokenUtil";
+import getTokenPriceChange from "../../utils/priceDifference";
 import priceFormat from "../../utils/priceFormat";
   
   const TokensTable = ({ tokens }: any) => {
@@ -19,7 +19,7 @@ import priceFormat from "../../utils/priceFormat";
     return (
   
         <TableContainer display={"block"}>
-          <Table variant={"striped"} colorScheme={"gray"} size={"md"}>
+          <Table variant={"striped"} colorScheme={"gray"} size={"sm"}>
             <Thead>
               <Tr>
                 <Th>Token</Th>
@@ -30,7 +30,7 @@ import priceFormat from "../../utils/priceFormat";
             </Thead>
             <Tbody>
               {tokens.map((token: any, index: number) => {
-                // console.log(tokens)
+        
                 return (
                   <>
                     <Tr>
