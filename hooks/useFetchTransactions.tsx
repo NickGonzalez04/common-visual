@@ -19,5 +19,17 @@ export function useFetchTransactions() {
             });
     }, []);
     
-    return {transactions, trnxLoading};
+    const refetchTransactions = () => {
+        setTrnxLoading(true);
+        execute(getTransactionsDocument, {}).then((response) => {
+            setTrnxLoading(false);
+            setTransactions(response?.data.transactions);
+        })
+        .catch((error) => {
+            console.log(error);
+            });
+    }
+
+
+    return {transactions, trnxLoading, refetchTransactions};
 }
