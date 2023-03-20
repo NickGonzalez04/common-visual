@@ -2,10 +2,10 @@ import { Card, CardHeader, CardBody, Text} from '@chakra-ui/react'
 
 interface PoolCard {
     id: string;
-    liquidity: string;
+    tvl: string;
 }
 
-const PoolCard = ({id, liquidity}) => {
+const PoolCard = ({id, tvl}: PoolCard) => {
 
 
     return (
@@ -15,9 +15,9 @@ const PoolCard = ({id, liquidity}) => {
                 <Text>
                     {id}
                 </Text>
-                <CardHeader>Liquidity</CardHeader>
+                <CardHeader>TVL</CardHeader>
                  <Text>
-                    {liquidity}
+                    {tvl}
                 </Text>
             </CardBody>
         </Card>

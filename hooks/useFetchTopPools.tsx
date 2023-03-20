@@ -12,7 +12,7 @@ export function useFetchTopPools() {
      execute(TopPoolByTVLDocument, {}).then((response) => {;
       setTopPools(response?.data.pools);
      });
-  }, [topPools]);
+  }, []);
 
   return topPools;
 }

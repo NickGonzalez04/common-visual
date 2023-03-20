@@ -1,9 +1,8 @@
-query TopPoolByTVL {
-    pools(orderBy: volumeUSD, orderDirection: desc, first: 10) {
-        id
-        liquidity
-        volumeUSD
-        totalValueLockedUSD
+query getTopPoolsByTVL {
+    pools(orderBy: totalValueLockedUSD, 
+    orderDirection: desc, 
+    first: 10
+    where: { volumeUSD_gt: 0, totalValueLockedUSD_gt: 0 }) {
         token0 {
             id
             symbol
@@ -14,6 +13,32 @@ query TopPoolByTVL {
             symbol
             name
         }
+        id
+        totalValueLockedUSD
+        poolDayData(first: 1, orderBy: date, orderDirection: desc) {
+            id
+            volumeUSD
+        }
     }
 }
 
+query getTokens {
+    tokens(first: 50, 
+    orderBy: totalValueLockedUSD, 
+    orderDirection: desc
+    where: { volumeUSD_gt: 0, totalValueLockedUSD_gt: 0 }) {
+        id
+        symbol
+        name
+        totalValueLockedUSD
+        tradeVolumeUSD
+        txCount
+        totalLiquidity
+        volumeUSD
+        tokenDayData(first: 1, orderBy: date, orderDirection: desc) {
+            priceUSD
+            volumeUSD
+            open
+            close  
+        }
+}
