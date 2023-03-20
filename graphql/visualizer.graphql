@@ -31,9 +31,6 @@ query getTokens {
         symbol
         name
         totalValueLockedUSD
-        tradeVolumeUSD
-        txCount
-        totalLiquidity
         volumeUSD
         tokenDayData(first: 1, orderBy: date, orderDirection: desc) {
             priceUSD
@@ -41,4 +38,5 @@ query getTokens {
             open
             close  
         }
+    }
 }
