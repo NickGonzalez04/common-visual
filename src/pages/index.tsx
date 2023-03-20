@@ -5,17 +5,18 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import PageLayout from "../../components/PageLayout";
 import PoolsTable from "../../components/pool/PoolsTable";
+import TransactionsTable from "../../components/transactions/trnxTable";
 import { useFetchTopPools } from "../../hooks/useFetchTopPools";
-import { useTokens } from "../../hooks/useTokens";
+import { useFetchTokens } from "../../hooks/useFetchTokens";
+import { useFetchTransactions } from "../../hooks/useFetchTransactions";
 import TokensTable from "../../components/token/tokenTable";
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const { topPools, poolsLoading } = useFetchTopPools();
-
-  const { tokens, isLoading } = useTokens();
-
+  const { topPools, poolsLoading, refetchTopPools } = useFetchTopPools();
+  const { tokens, isLoading } = useFetchTokens();
+  const { transactions, trnxLoading } = useFetchTransactions();
 
 
   return (
@@ -31,14 +32,14 @@ export default function Home() {
 
           <Tabs colorScheme={"gray"}>
             <TabList>
-              <Tab>Top Liquidity Pools</Tab>
+              <Tab>Top Pools</Tab>
               <Tab>Top Tokens</Tab>
               <Tab>Transactions</Tab>
             </TabList>
           <TabPanels>
-            <TabPanel><PoolsTable topPools={topPools} poolsLoading={poolsLoading} /></TabPanel>
+            <TabPanel><PoolsTable topPools={topPools} poolsLoading={poolsLoading} refetchTopPools={refetchTopPools} /></TabPanel>
             <TabPanel><TokensTable tokens={tokens} isLoading={isLoading} /></TabPanel>
-            <TabPanel>Transactions</TabPanel>
+            <TabPanel><TransactionsTable transactions={transactions} /></TabPanel>
         </TabPanels>
         </Tabs>
 

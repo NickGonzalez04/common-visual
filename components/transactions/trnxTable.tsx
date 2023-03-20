@@ -15,7 +15,6 @@ import {
   const TransactionsTable = ({ transactions }: any) => {
 
 
-
     return (
 
         <TableContainer display={"block"}>
@@ -31,7 +30,8 @@ import {
                 </Tr>
             </Thead> 
             <Tbody>
-                {transactions.map((transaction: any, index: number) => {
+            {transactions && 
+                transactions.map((transaction: any, index: number) => {
                     return (
                         <>
                             <Tr>
@@ -51,3 +51,5 @@ import {
         </TableContainer>
     )
   };
+
+  export default TransactionsTable;

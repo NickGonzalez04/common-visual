@@ -1,5 +1,8 @@
 import {
   VStack,
+  Box,
+  Spinner,
+  Icon,
   Table,
   Thead,
   Tbody,
@@ -9,15 +12,26 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Button,
+  Heading,
+  HStack,
 } from "@chakra-ui/react";
 import priceFormat from "../../utils/priceFormat";
 // import PoolCard from "./PoolCard";
 
-const PoolsTable = ({ topPools }: any) => {
+const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }: any) => {
 
 
   return (
-
+    <Box>
+    <HStack spacing={'24'}>
+    <Heading>Top Pools</Heading>
+    <Button 
+    isLoading={poolsLoading}
+    loadingText="Refreshing"
+    size={'xs'} 
+    onClick={refetchTopPools}>Refresh</Button>
+    </HStack>
       <TableContainer display={"block"}>
         <Table variant={"striped"} colorScheme={"gray"} size={"sm"}>
           <Thead>
@@ -27,8 +41,10 @@ const PoolsTable = ({ topPools }: any) => {
               <Th>Volume 24hr</Th>
             </Tr>
           </Thead>
+          
           <Tbody>
-            {topPools &&
+            {poolsLoading ?
+            <Spinner size={'xl'} /> : topPools &&
                 topPools.map((pool: any, index: number) => {
               return (
                 <>
@@ -43,6 +59,7 @@ const PoolsTable = ({ topPools }: any) => {
           </Tbody>
         </Table>
       </TableContainer>
+    </Box>
   );
 };
 

@@ -15,7 +15,7 @@ import priceFormat from "../../utils/priceFormat";
   
   const TokensTable = ({ tokens }: any) => {
   
-  
+
     return (
   
         <TableContainer display={"block"}>

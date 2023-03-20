@@ -3,13 +3,14 @@ import { getTransactionsQuery, getTransactionsDocument, execute } from '../.grap
 
 
 
-export function useTransactions() {
+export function useFetchTransactions() {
     const [transactions, setTransactions] = useState<getTransactionsQuery[]>([]);
-    const [isLoading, setTrnxLoading] = useState<boolean>(false);
+    const [trnxLoading, setTrnxLoading] = useState<boolean>(false);
 
     useEffect(() => {
         setTrnxLoading(true);
          execute(getTransactionsDocument, {}).then((response) => {
+            console.log("trnx", response?.data.transactions)
             setTrnxLoading(false);
             setTransactions(response?.data.transactions);
          })
@@ -18,5 +19,5 @@ export function useTransactions() {
             });
     }, []);
     
-    return {transactions};
+    return {transactions, trnxLoading};
 }

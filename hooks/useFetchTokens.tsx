@@ -4,7 +4,7 @@ import {
 } from '../.graphclient';
 
 
-export function useTokens() {
+export function useFetchTokens() {
     const [tokens, setTokens] = useState<getTokensQuery[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
