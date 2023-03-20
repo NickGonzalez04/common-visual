@@ -3,7 +3,19 @@ import { GraphQLResolveInfo, SelectionSetNode, FieldNode, GraphQLScalarType, Gra
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import { gql } from '@graphql-mesh/utils';
 
-import { findAndParseConfig } from '@graphql-mesh/cli';
+import type { GetMeshOptions } from '@graphql-mesh/runtime';
+import type { YamlConfig } from '@graphql-mesh/types';
+import { PubSub } from '@graphql-mesh/utils';
+import { DefaultLogger } from '@graphql-mesh/utils';
+import MeshCache from "@graphql-mesh/cache-localforage";
+import { fetch as fetchFn } from '@whatwg-node/fetch';
+
+import { MeshResolvedSource } from '@graphql-mesh/runtime';
+import { MeshTransform, MeshPlugin } from '@graphql-mesh/types';
+import GraphqlHandler from "@graphql-mesh/graphql"
+import AutoPaginationTransform from "@graphprotocol/client-auto-pagination";
+import BareMerger from "@graphql-mesh/merger-bare";
+import { printWithCache } from '@graphql-mesh/utils';
 import { createMeshHTTPHandler, MeshHTTPHandler } from '@graphql-mesh/http';
 import { getMesh, ExecuteMeshFn, SubscribeMeshFn, MeshContext as BaseMeshContext, MeshInstance } from '@graphql-mesh/runtime';
 import { MeshStore, FsStoreStorageAdapter } from '@graphql-mesh/store';
@@ -6095,6 +6107,9 @@ const baseDir = pathModule.join(pathModule.dirname(fileURLToPath(import.meta.url
 const importFn: ImportFn = <T>(moduleId: string) => {
   const relativeModuleId = (pathModule.isAbsolute(moduleId) ? pathModule.relative(baseDir, moduleId) : moduleId).split('\\').join('/').replace(baseDir + '/', '');
   switch(relativeModuleId) {
+    case ".graphclient/sources/uniswapv3/introspectionSchema":
+      return import("./sources/uniswapv3/introspectionSchema") as T;
+    
     default:
       return Promise.reject(new Error(`Cannot find module '${relativeModuleId}'.`));
   }
@@ -6109,15 +6124,85 @@ const rootStore = new MeshStore('.graphclient', new FsStoreStorageAdapter({
   validate: false
 });
 
-export function getMeshOptions() {
-  console.warn('WARNING: These artifacts are built for development mode. Please run "graphclient build" to build production artifacts');
-  return findAndParseConfig({
-    dir: baseDir,
-    artifactsDir: ".graphclient",
-    configName: "graphclient",
-    additionalPackagePrefixes: ["@graphprotocol/client-"],
-    initialLoggerPrefix: "GraphClient",
-  });
+export const rawServeConfig: YamlConfig.Config['serve'] = undefined as any
+export async function getMeshOptions(): Promise<GetMeshOptions> {
+const pubsub = new PubSub();
+const sourcesStore = rootStore.child('sources');
+const logger = new DefaultLogger("GraphClient");
+const cache = new (MeshCache as any)({
+      ...({} as any),
+      importFn,
+      store: rootStore.child('cache'),
+      pubsub,
+      logger,
+    } as any)
+
+const sources: MeshResolvedSource[] = [];
+const transforms: MeshTransform[] = [];
+const additionalEnvelopPlugins: MeshPlugin<any>[] = [];
+const uniswapv3Transforms = [];
+const additionalTypeDefs = [] as any[];
+const uniswapv3Handler = new GraphqlHandler({
+              name: "uniswapv3",
+              config: {"endpoint":"https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3"},
+              baseDir,
+              cache,
+              pubsub,
+              store: sourcesStore.child("uniswapv3"),
+              logger: logger.child("uniswapv3"),
+              importFn,
+            });
+uniswapv3Transforms[0] = new AutoPaginationTransform({
+                  apiName: "uniswapv3",
+                  config: null,
+                  baseDir,
+                  cache,
+                  pubsub,
+                  importFn,
+                  logger,
+                });
+sources[0] = {
+          name: 'uniswapv3',
+          handler: uniswapv3Handler,
+          transforms: uniswapv3Transforms
+        }
+const additionalResolvers = [] as any[]
+const merger = new(BareMerger as any)({
+        cache,
+        pubsub,
+        logger: logger.child('bareMerger'),
+        store: rootStore.child('bareMerger')
+      })
+
+  return {
+    sources,
+    transforms,
+    additionalTypeDefs,
+    additionalResolvers,
+    cache,
+    pubsub,
+    merger,
+    logger,
+    additionalEnvelopPlugins,
+    get documents() {
+      return [
+      {
+        document: GetTopPoolsByTvlDocument,
+        get rawSDL() {
+          return printWithCache(GetTopPoolsByTvlDocument);
+        },
+        location: 'GetTopPoolsByTvlDocument.graphql'
+      },{
+        document: GetTokensDocument,
+        get rawSDL() {
+          return printWithCache(GetTokensDocument);
+        },
+        location: 'GetTokensDocument.graphql'
+      }
+    ];
+    },
+    fetchFn,
+  };
 }
 
 export function createBuiltMeshHTTPHandler<TServerContext = {}>(): MeshHTTPHandler<TServerContext> {
@@ -6127,6 +6212,7 @@ export function createBuiltMeshHTTPHandler<TServerContext = {}>(): MeshHTTPHandl
     rawServeConfig: undefined,
   })
 }
+
 
 let meshInstance$: Promise<MeshInstance> | undefined;
 

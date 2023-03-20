@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import PageLayout from "../../components/PageLayout";
@@ -13,6 +13,8 @@ import { useTokens } from "../../hooks/useTokens";
 export default function Home() {
   const poolData = useFetchTopPools();
   const tokenData = useTokens();
+  console.log("queried Tokens", tokenData);
+
 
   return (
     <>
@@ -24,12 +26,16 @@ export default function Home() {
       </Head>
       <PageLayout>
         <main className={styles.main}>
-          <div className={styles.description}>
-            <p>Top Liquidity Pools</p>
-          </div>
-          {/* <div className={styles.center}> */}
-            <PoolsTable topPools={poolData} />
-          {/* </div> */}
+          <Tabs variant='enclosed'>
+            <TabList>
+              <Tab>Top Liquidity Pools</Tab>
+              <Tab>Top Tokens</Tab>
+            </TabList>
+          <TabPanels>
+            <TabPanel><PoolsTable topPools={poolData} /></TabPanel>
+            <TabPanel>Top Tokens</TabPanel>
+        </TabPanels>
+        </Tabs>
         </main>
       </PageLayout>
     </>
