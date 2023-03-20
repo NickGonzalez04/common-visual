@@ -10,7 +10,7 @@ import {
     TableCaption,
     TableContainer,
   } from "@chakra-ui/react";
-  
+import getTokenPriceChange from "../../utils/tokenUtil";
 
   
   const TokensTable = ({ tokens }: any) => {
@@ -44,7 +44,10 @@ import {
                     <Tr>
                     <Td>{token.name}</Td>
                     <Td>{formatLiquidity(token.tokenDayData[0].priceUSD)}</Td>
-                    <Td>{token.tokenDayData[0].open}</Td>
+                {/* {
+                    Conditional rendering for price change based on negative or positive
+                } */}
+                    <Td>{Math.abs(getTokenPriceChange(token.tokenDayData[0].open, token.tokenDayData[0].close)).toFixed(2)}</Td>
                       <Td>{formatLiquidity(token.totalValueLockedUSD)}</Td>
                     </Tr>
                   </>

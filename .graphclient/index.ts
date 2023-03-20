@@ -6198,6 +6198,12 @@ const merger = new(BareMerger as any)({
           return printWithCache(GetTokensDocument);
         },
         location: 'GetTokensDocument.graphql'
+      },{
+        document: GetTransactionsDocument,
+        get rawSDL() {
+          return printWithCache(GetTransactionsDocument);
+        },
+        location: 'GetTransactionsDocument.graphql'
       }
     ];
     },
@@ -6252,6 +6258,23 @@ export type getTokensQuery = { tokens: Array<(
     & { tokenDayData: Array<Pick<TokenDayData, 'priceUSD' | 'volumeUSD' | 'open' | 'close'>> }
   )> };
 
+export type getTransactionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type getTransactionsQuery = { transactions: Array<(
+    Pick<Transaction, 'id' | 'timestamp'>
+    & { mints: Array<Maybe<(
+      Pick<Mint, 'id' | 'sender' | 'amountUSD' | 'amount0' | 'amount1'>
+      & { transaction: Pick<Transaction, 'id'>, token0: Pick<Token, 'id' | 'name' | 'symbol'>, token1: Pick<Token, 'id' | 'name' | 'symbol'> }
+    )>>, swaps: Array<Maybe<(
+      Pick<Swap, 'id' | 'sender' | 'amountUSD' | 'amount0' | 'amount1'>
+      & { transaction: Pick<Transaction, 'id'>, token0: Pick<Token, 'id' | 'name' | 'symbol'>, token1: Pick<Token, 'id' | 'name' | 'symbol'> }
+    )>>, burns: Array<Maybe<(
+      Pick<Burn, 'id' | 'origin' | 'amountUSD' | 'amount0' | 'amount1'>
+      & { transaction: Pick<Transaction, 'id'>, token0: Pick<Token, 'id' | 'name' | 'symbol'>, token1: Pick<Token, 'id' | 'name' | 'symbol'> }
+    )>> }
+  )> };
+
 
 export const getTopPoolsByTVLDocument = gql`
     query getTopPoolsByTVL {
@@ -6302,6 +6325,75 @@ export const getTokensDocument = gql`
   }
 }
     ` as unknown as DocumentNode<getTokensQuery, getTokensQueryVariables>;
+export const getTransactionsDocument = gql`
+    query getTransactions {
+  transactions(first: 10, orderBy: timestamp, orderDirection: desc) {
+    id
+    timestamp
+    mints {
+      id
+      transaction {
+        id
+      }
+      token0 {
+        id
+        name
+        symbol
+      }
+      token1 {
+        id
+        name
+        symbol
+      }
+      sender
+      amountUSD
+      amount0
+      amount1
+    }
+    swaps {
+      id
+      transaction {
+        id
+      }
+      token0 {
+        id
+        name
+        symbol
+      }
+      token1 {
+        id
+        name
+        symbol
+      }
+      sender
+      amountUSD
+      amount0
+      amount1
+    }
+    burns {
+      id
+      transaction {
+        id
+      }
+      token0 {
+        id
+        name
+        symbol
+      }
+      token1 {
+        id
+        name
+        symbol
+      }
+      origin
+      amountUSD
+      amount0
+      amount1
+    }
+  }
+}
+    ` as unknown as DocumentNode<getTransactionsQuery, getTransactionsQueryVariables>;
+
 
 
 
@@ -6313,6 +6405,9 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
     },
     getTokens(variables?: getTokensQueryVariables, options?: C): Promise<getTokensQuery> {
       return requester<getTokensQuery, getTokensQueryVariables>(getTokensDocument, variables, options) as Promise<getTokensQuery>;
+    },
+    getTransactions(variables?: getTransactionsQueryVariables, options?: C): Promise<getTransactionsQuery> {
+      return requester<getTransactionsQuery, getTransactionsQueryVariables>(getTransactionsDocument, variables, options) as Promise<getTransactionsQuery>;
     }
   };
 }

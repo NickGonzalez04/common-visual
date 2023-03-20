@@ -106,4 +106,5 @@ query getTransactions {
         amount0
         amount1
       }
+    }
 }

@@ -12,9 +12,10 @@ import TokensTable from "../../components/token/tokenTable";
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const poolData = useFetchTopPools();
+  const topPools = useFetchTopPools();
+
   const tokenData = useTokens();
-  console.log("queried Tokens", tokenData);
+  // console.log("queried Tokens", tokenData);
 
 
   return (
@@ -34,7 +35,7 @@ export default function Home() {
               <Tab>Top Tokens</Tab>
             </TabList>
           <TabPanels>
-            <TabPanel><PoolsTable topPools={poolData} /></TabPanel>
+            <TabPanel><PoolsTable topPools={topPools} /></TabPanel>
             <TabPanel><TokensTable tokens={tokenData} /></TabPanel>
         </TabPanels>
         </Tabs>

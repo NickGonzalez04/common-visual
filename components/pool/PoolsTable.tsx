@@ -50,7 +50,6 @@ const PoolsTable = ({ topPools }: any) => {
           </Tbody>
         </Table>
       </TableContainer>
-
   );
 };
 
