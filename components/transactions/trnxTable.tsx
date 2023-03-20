@@ -13,13 +13,25 @@ import {
     TableCaption,
     TableContainer,
   } from "@chakra-ui/react";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
+
+dayjs.extend(relativeTime);
 
   const TransactionsTable = ({ transactions }: any) => {
 
 
+    // Format time to compare with current time
+    const formatTrxTime = (unix: number) => {
+        let now = dayjs();
+        return now.diff(unix, 'seconds') < 60 ? 'Just now' : dayjs.unix(unix).fromNow();
+    }
+
+    console.log(transactions)
+
     return (
-        <Box>
+        <Box marginTop={"8"}>
         <HStack spacing={'12'} alignItems={'center'}>
         <Heading>Transactions</Heading>
         <Button 
@@ -55,7 +67,7 @@ import {
                                 <Td>{transaction.tokenAmount}</Td> */}
                                 <Td>{transaction.price}</Td>
                                 <Td>{transaction.account}</Td>
-                                <Td>{transaction.timeStamp}</Td>
+                                <Td>{formatTrxTime(transaction.timestamp)}</Td>
                             </Tr>
                         </>
                     );

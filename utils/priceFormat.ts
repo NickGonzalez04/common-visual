@@ -1,6 +1,6 @@
 
 
-export default function priceFormat(liquidity: number): string {
+export default function priceFormat(liquidity: number):string {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",

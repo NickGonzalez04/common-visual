@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel, Container, VStack } from '@chakra-ui/react'
+import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel, Container, VStack, Heading, TableContainer } from '@chakra-ui/react'
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import PageLayout from "../../components/PageLayout";
@@ -29,8 +29,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>
-        <Container>
-          <Tabs colorScheme={"gray"}>
+        {/* <Container> */}
+          <Tabs colorScheme={"gray"} variant='enclosed'>
             <TabList>
               <Tab>Overview</Tab>
               <Tab>Pools</Tab>
@@ -41,12 +41,18 @@ export default function Home() {
             <TabPanel>
               <OverView topPools={topPools} tokens={tokens} transactions={transactions}/>
             </TabPanel>
-            <TabPanel><PoolsTable topPools={topPools} poolsLoading={poolsLoading} refetchTopPools={refetchTopPools} /></TabPanel>
-            <TabPanel><TokensTable tokens={tokens} isLoading={isLoading} refetchTokens={refetchTokens} /></TabPanel>
-            <TabPanel><TransactionsTable transactions={transactions} /></TabPanel>
+            <TabPanel>
+              <PoolsTable topPools={topPools} poolsLoading={poolsLoading} refetchTopPools={refetchTopPools} />
+              </TabPanel>
+            <TabPanel>
+              <TokensTable tokens={tokens} isLoading={isLoading} refetchTokens={refetchTokens} />
+              </TabPanel>
+            <TabPanel>
+              <TransactionsTable transactions={transactions} />
+            </TabPanel>
         </TabPanels>
         </Tabs>
-        </Container>
+        {/* </Container> */}
     </PageLayout>
     </>
   );

@@ -24,7 +24,7 @@ const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }: any) => {
 
 
   return (
-    <Box>
+    <Box marginTop={"8"}>
     <HStack spacing={'12'} alignItems={'center'}>
     <Heading>Top Pools</Heading>
     <Button 
@@ -36,16 +36,18 @@ const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }: any) => {
     onClick={refetchTopPools}>{' '}Refresh</Button>
     
     </HStack>
-      <TableContainer>
+    <TableContainer display={"block"}>
         <Table variant={"striped"} colorScheme={"gray"} size={"sm"}>
           <Thead>
             <Tr>
               <Th>Pools</Th>
+              {/* <Th>{''}</Th>
+              <Td>{''}</Td>
+              <Td>{''}</Td> */}
               <Th>TVL</Th>
               <Th>Volume 24hr</Th>
             </Tr>
           </Thead>
-          
           <Tbody>
             {poolsLoading ?
             <Spinner size={'xl'} /> : topPools &&
@@ -54,12 +56,14 @@ const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }: any) => {
                 <>
                   <Tr>
                     <Td>{pool.token0.symbol ===  "WETH" ? "ETH" : pool.token0.symbol === "WBTC" ? 'BTC': pool.token0.symbol}/{pool.token1.symbol ===  "WETH" ? "ETH" : pool.token1.symbol === "WBTC" ? 'BTC': pool.token1.symbol}</Td>
+                    {/* <Td>{''}</Td>
+                    <Td>{''}</Td>
+                    <Td>{''}</Td> */}
                     <Td>{priceFormat(pool.totalValueLockedUSD)}</Td>
                     <Td>{priceFormat(pool.poolDayData[0].volumeUSD)}</Td>
                   </Tr>
-                </>
-              );
-            })}
+                  </>
+            )})}
           </Tbody>
         </Table>
       </TableContainer>

@@ -1,9 +1,10 @@
 import {
-    VStack,
     HStack,
     Box,
     Button,
     Heading,
+    StatArrow,
+    StatHelpText,
     Table,
     Thead,
     Tbody,
@@ -11,7 +12,6 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
   } from "@chakra-ui/react";
 import getTokenPriceChange from "../../utils/priceDifference";
@@ -21,7 +21,7 @@ import priceFormat from "../../utils/priceFormat";
   
 
     return (
-        <Box>
+        <Box marginTop={"8"}>
         <HStack spacing={'12'} alignItems={'center'}>
         <Heading>All Tokens</Heading>
         <Button 
@@ -34,7 +34,7 @@ import priceFormat from "../../utils/priceFormat";
         
         </HStack>
         <TableContainer display={"block"}>
-          <Table variant={"striped"} colorScheme={"gray"} size={"sm"}>
+          <Table variant={"striped"} colorScheme={"gray"} size={"sm"} maxWidth={"100%"}>
             <Thead>
               <Tr>
                 <Th>Token</Th>
@@ -63,7 +63,7 @@ import priceFormat from "../../utils/priceFormat";
             </Tbody>
           </Table>
         </TableContainer>
-        </Box>
+    </Box>
     );
   };
   

@@ -1,9 +1,10 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Heading, VStack } from '@chakra-ui/react'
 
 export default function PageLayout({children}: {children: React.ReactNode}) {
   return (
-    <div>
+    <VStack spacing={8}>
+      <Heading>Common Visualizer</Heading>
       <Box>{children}</Box>
-    </div>
+    </VStack>
   );
 }
