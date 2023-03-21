@@ -23,7 +23,7 @@ import transactionFilter from "../../utils/transactionFilter";
 
 
     const filtered = transactionFilter(transactions)
-    // console.log(filtered);
+
     return (
         <Box marginTop={"8"}>
         <HStack spacing={'12'} alignItems={'center'}>
@@ -52,15 +52,12 @@ import transactionFilter from "../../utils/transactionFilter";
             </Thead> 
             <Tbody>
                 {filtered && filtered.map((transaction: any, index: number) => {
-                    // console.log(transaction);
                     return (
                         <>
                             <Tr key={index}>
                                 <Td>swap</Td>
                                 <Td>{priceFormat(transaction.swaps[0].amountUSD)}</Td>
                                 {/* Transaction is based on type e.g., burns, mints, swaps */}
-                                {/* <Td>{transaction.tokenAmount}</Td>
-                                <Td>{transaction.tokenAmount}</Td> */}
                                 <Td>{Math.abs(transaction.swaps[0].amount0).toFixed(2)} {transaction.swaps[0].token0.symbol}</Td>
                                 <Td>{Math.abs(transaction.swaps[0].amount1).toFixed(2)} {transaction.swaps[0].token1.symbol}</Td>
                                 <Td><Link href={`https://etherscan.io/address/${transaction.swaps[0].sender}`}>{transaction.swaps[0].sender.substring(0,5).toLowerCase()}...</Link></Td>
