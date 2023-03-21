@@ -72,3 +72,5 @@ const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }: any) => {
 };
 
 export default PoolsTable;
+
+

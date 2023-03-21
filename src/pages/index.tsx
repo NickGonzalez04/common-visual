@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel, Container, VStack, Heading, TableContainer } from '@chakra-ui/react'
+import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import PageLayout from "../../components/PageLayout";
@@ -17,7 +17,7 @@ import OverView from "../../components/overView";
 export default function Home() {
   const { topPools, poolsLoading, refetchTopPools } = useFetchTopPools();
   const { tokens, isLoading, refetchTokens } = useFetchTokens();
-  const { transactions, trnxLoading } = useFetchTransactions();
+  const { transactions, trnxLoading} = useFetchTransactions();
 
 
   return (

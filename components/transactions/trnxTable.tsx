@@ -13,23 +13,17 @@ import {
     TableCaption,
     TableContainer,
   } from "@chakra-ui/react";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import Link from "next/link";
+import formatTrxTime from "../../utils/dateFormat";
+import priceFormat from "../../utils/priceFormat";
 
-
-dayjs.extend(relativeTime);
+import transactionFilter from "../../utils/transactionFilter";
 
   const TransactionsTable = ({ transactions }: any) => {
 
 
-    // Format time to compare with current time
-    const formatTrxTime = (unix: number) => {
-        let now = dayjs();
-        return now.diff(unix, 'seconds') < 60 ? 'Just now' : dayjs.unix(unix).fromNow();
-    }
-
-    console.log(transactions)
-
+    const filtered = transactionFilter(transactions)
+    // console.log(filtered);
     return (
         <Box marginTop={"8"}>
         <HStack spacing={'12'} alignItems={'center'}>
@@ -47,35 +41,38 @@ dayjs.extend(relativeTime);
           <Table variant={"striped"} colorScheme={"gray"} size={"sm"}>
             <Thead>
               <Tr>
+                <Th>Type</Th>
                 <Th>Total Value</Th>
                 <Th>Token Amount</Th>
                 <Th>Token Amount</Th>
-                <Th>Price</Th>
+                {/* <Th>Price</Th> */}
                 <Th>Account</Th>
                 <Th>Time</Th>
                 </Tr>
             </Thead> 
             <Tbody>
-            {transactions && 
-                transactions.map((transaction: any, index: number) => {
+                {filtered && filtered.map((transaction: any, index: number) => {
+                    // console.log(transaction);
                     return (
                         <>
-                            <Tr>
-                                <Td>{transaction.totalValue}</Td>
+                            <Tr key={index}>
+                                <Td>swap</Td>
+                                <Td>{priceFormat(transaction.swaps[0].amountUSD)}</Td>
                                 {/* Transaction is based on type e.g., burns, mints, swaps */}
                                 {/* <Td>{transaction.tokenAmount}</Td>
                                 <Td>{transaction.tokenAmount}</Td> */}
-                                <Td>{transaction.price}</Td>
-                                <Td>{transaction.account}</Td>
+                                <Td>{Math.abs(transaction.swaps[0].amount0).toFixed(2)} {transaction.swaps[0].token0.symbol}</Td>
+                                <Td>{Math.abs(transaction.swaps[0].amount1).toFixed(2)} {transaction.swaps[0].token1.symbol}</Td>
+                                <Td><Link href={`https://etherscan.io/address/${transaction.swaps[0].sender}`}>{transaction.swaps[0].sender.substring(0,5).toLowerCase()}...</Link></Td>
                                 <Td>{formatTrxTime(transaction.timestamp)}</Td>
                             </Tr>
                         </>
-                    );
+                    )
                 })}
             </Tbody>
             </Table>
         </TableContainer>
-        </Box>
+    </Box>
     )
   };
 

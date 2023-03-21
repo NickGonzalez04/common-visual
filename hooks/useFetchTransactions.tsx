@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import { getTransactionsQuery, getTransactionsDocument, execute } from '../.graphclient';
-
+import transactionFilter from '../utils/transactionFilter';
 
 
 export function useFetchTransactions() {
@@ -10,7 +10,7 @@ export function useFetchTransactions() {
     useEffect(() => {
         setTrnxLoading(true);
          execute(getTransactionsDocument, {}).then((response) => {
-            console.log("trnx", response?.data.transactions)
+            // console.log("trnx", transactionFilter(response?.data.transactions));
             setTrnxLoading(false);
             setTransactions(response?.data.transactions);
          })
@@ -27,8 +27,9 @@ export function useFetchTransactions() {
         })
         .catch((error) => {
             console.log(error);
-            });
+        });
     }
+
 
 
     return {transactions, trnxLoading, refetchTransactions};
