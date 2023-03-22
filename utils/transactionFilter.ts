@@ -69,9 +69,6 @@ interface Transaction {
 // Find the transaction type that is not equal to length of zero
 // If the transaction type is not equal to length of zero, then return the transaction type
 export default function transactionFilter (transactions: Transaction[]){
-    // const filtered = transactions.filter((transaction) => {
-    //      return transaction.mints.length > 0 || transaction.burns.length > 0 || transaction.swaps.length > 0
-    // });
 
     return transactions.map(({ mints, swaps, burns, ...rest }) => ({
         ...rest,
@@ -80,6 +77,5 @@ export default function transactionFilter (transactions: Transaction[]){
         ...(burns.length && { burns })
       }));
 
-// return filtered;
 }
 

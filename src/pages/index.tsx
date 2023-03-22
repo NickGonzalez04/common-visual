@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import PageLayout from "../../components/PageLayout";
 import PoolsTable from "../../components/pool/PoolsTable";
 import TransactionsTable from "../../components/transactions/trnxTable";
 import { useFetchTopPools } from "../../hooks/useFetchTopPools";
@@ -11,6 +10,7 @@ import { useFetchTokens } from "../../hooks/useFetchTokens";
 import { useFetchTransactions } from "../../hooks/useFetchTransactions";
 import TokensTable from "../../components/token/tokenTable";
 import OverView from "../../components/overView";
+import PageLayout from "../../components/pageLayout";
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +19,7 @@ export default function Home() {
   const { tokens, isLoading, refetchTokens } = useFetchTokens();
   const { transactions, trnxLoading} = useFetchTransactions();
 
+    console.log("tokens", tokens);
 
   return (
     <>
@@ -28,32 +29,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageLayout>
-        {/* <Container> */}
-          <Tabs colorScheme={"gray"} variant='enclosed'>
-            <TabList>
-              <Tab>Overview</Tab>
-              <Tab>Pools</Tab>
-              <Tab>Tokens</Tab>
-              <Tab>Transactions</Tab>
-            </TabList>
-          <TabPanels>
-            <TabPanel>
-              <OverView topPools={topPools} tokens={tokens} transactions={transactions}/>
-            </TabPanel>
-            <TabPanel>
-              <PoolsTable topPools={topPools} poolsLoading={poolsLoading} refetchTopPools={refetchTopPools} />
-              </TabPanel>
-            <TabPanel>
-              <TokensTable tokens={tokens} isLoading={isLoading} refetchTokens={refetchTokens} />
-              </TabPanel>
-            <TabPanel>
-              <TransactionsTable transactions={transactions} />
-            </TabPanel>
-        </TabPanels>
-        </Tabs>
-        {/* </Container> */}
-    </PageLayout>
+        <PageLayout topPools={topPools} poolsLoading={poolsLoading} tokens={tokens} />
     </>
   );
 }

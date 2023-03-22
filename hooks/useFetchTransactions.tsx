@@ -10,7 +10,6 @@ export function useFetchTransactions() {
     useEffect(() => {
         setTrnxLoading(true);
          execute(getTransactionsDocument, {}).then((response) => {
-            // console.log("trnx", transactionFilter(response?.data.transactions));
             setTrnxLoading(false);
             setTransactions(response?.data.transactions);
          })
