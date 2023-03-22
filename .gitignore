@@ -14,6 +14,9 @@
 /.next/
 /out/
 
+# graphClient
+/.graphClient/
+
 # production
 /build
 

@@ -1,8 +1,7 @@
-import { Tab, TableContainer, Table, VStack } from "@chakra-ui/react";
 
-import PoolsTable from "./pool/PoolTable";
-import TokensTable from "./token/TokenTable";
-import TransactionsTable from "./transactions/trnxTableAD";
+import PoolsTable from './pool/PoolTable'
+import TokenTable from './token/TokenTable'
+import TransactionsTable from './transactions/trnxTableAD'
 
 const OverView = ({
   topPools,
@@ -12,9 +11,9 @@ const OverView = ({
   tokensLoading,
   refetchTokens,
   transactions,
-  trnxLoading,
+  trnxLoading
 }: // refetchTransactions,
-any) => {
+any): JSX.Element => {
   return (
     <div>
       <PoolsTable
@@ -22,7 +21,7 @@ any) => {
         poolsLoading={poolsLoading}
         refetchTopPools={refetchTopPools}
       />
-      <TokensTable
+      <TokenTable
         tokens={tokens}
         tokensLoading={tokensLoading}
         refetchTokens={refetchTokens}
@@ -33,7 +32,7 @@ any) => {
         // refetchTransactions={refetchTransactions}
       />
     </div>
-  );
-};
+  )
+}
 
-export default OverView;
+export default OverView
