@@ -43,7 +43,7 @@ const headerStyle: React.CSSProperties = {
 
 
 
-const PageLayout = ({topPools, poolsLoading, tokens}: any) => {
+const PageLayout = ({topPools, poolsLoading, refetchTopPools, tokens, tokensLoading, refetchTokens, transactions, refetchTransactions}: any) => {
 
   const onChange = (key: string) => {
     console.log(key);
@@ -53,17 +53,17 @@ const PageLayout = ({topPools, poolsLoading, tokens}: any) => {
     {
       key: '1',
       label: 'Overview',
-      children: <OverView topPools={topPools} poolsLoading={poolsLoading} tokens={tokens} />,
+      children: <OverView topPools={topPools} poolsLoading={poolsLoading} refetchTopPools={refetchTopPools} tokens={tokens}  tokensLoading={tokensLoading} refetchTokens={refetchTokens} transactions={transactions} refetchTransaction={refetchTransactions}/>,
     },
     {
       key: '2',
       label: 'Pools',
-      children: <PoolsTable topPools={topPools} poolsLoading={poolsLoading}/>,
+      children: <PoolsTable topPools={topPools} poolsLoading={poolsLoading} refetchTopPools={refetchTopPools}/>,
     },
     {
       key: '3',
       label: 'Tokens',
-      children: <TokensTable tokens={tokens} />,
+      children: <TokensTable tokens={tokens} tokensLoading={tokensLoading} refetchTokens={refetchTokens} />,
     }
 ];
 
@@ -72,7 +72,6 @@ const PageLayout = ({topPools, poolsLoading, tokens}: any) => {
             <Header style={headerStyle}>Common Visualizer</Header>    
             <Content style={contentStyle}>
               <Tabs defaultActiveKey="1" items={items} onChange={onChange}/>
-              {/* <OverView topPools={topPools} poolsLoading={poolsLoading}/> */}
               </Content>
             <Footer style={footerStyle}>Common Visualizer ©2021 Created by Common</Footer>
         </Layout>

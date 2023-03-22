@@ -14,7 +14,7 @@ import PageLayout from "../../components/pageLayout";
 export default function Home() {
   const { topPools, poolsLoading, refetchTopPools } = useFetchTopPools();
   const { tokens, isLoading, refetchTokens } = useFetchTokens();
-  const { transactions, trnxLoading } = useFetchTransactions();
+  const { transactions, trnxLoading, refetchTransactions } = useFetchTransactions();
 
 
   return (
@@ -34,6 +34,7 @@ export default function Home() {
         trnxLoading={trnxLoading}
         refetchTopPools={refetchTopPools}
         refetchTokens={refetchTokens}
+        refetchTransactions={refetchTransactions}
       />
     </>
   );

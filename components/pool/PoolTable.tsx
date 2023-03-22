@@ -1,5 +1,5 @@
 import { border } from "@chakra-ui/react";
-import { Table, Spin } from "antd";
+import {  Button, Table, Spin } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 
 // Helper Functions
@@ -50,29 +50,28 @@ const columns: ColumnsType<PoolDataType> = [
 const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }: any) => {
   const data: PoolDataType[] = [
     ...topPools.map((pool: any, index: number) => {
+      console.log(pool)
       return {
         key: pool.id,
         index: index + 1,
-        pool:
-          pool.token0.symbol === "WETH"
-            ? "ETH"
-            : pool.token0.symbol === "WBTC"
-            ? "BTC"
-            : pool.token0.symbol + "/" + pool.token1.symbol === "WETH"
-            ? "ETH"
-            : pool.token1.symbol === "WBTC"
-            ? "BTC"
-            : pool.token1.symbol,
+        pool: (pool.token0.symbol === "WETH" ? "ETH": pool.token0.symbol === "WBTC"? "BTC" : pool.token0.symbol) + "/" +
+        (pool.token1.symbol === "WETH" ? "ETH": pool.token1.symbol === "WBTC"? "BTC" : pool.token1.symbol),
         tvl: priceFormat(pool.totalValueLockedUSD),
         volume: priceFormat(pool.poolDayData[0].volumeUSD),
       };
     }),
   ];
 
-console.log(poolsLoading);
+
 
   return (
     <div>
+      <div style={{display: "flex", justifyContent: "space-between"}}>
+      <h1 style={{marginRight: 16}}>Top Tokens</h1>
+       <div style={{ marginBottom: 16 }}>
+      <Button onClick={refetchTopPools} loading={poolsLoading}>Refresh</Button>
+      </div>
+      </div>
       <Table
         // bordered={true}
         columns={columns}

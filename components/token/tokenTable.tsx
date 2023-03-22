@@ -1,4 +1,5 @@
-import { Table, Spin } from "antd";
+import { Button, Table, Spin, Statistic } from "antd";
+import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 import priceFormat from "../../utils/priceFormat";
@@ -41,7 +42,17 @@ const columns: ColumnsType<TokenTypeData> = [
         dataIndex: 'priceChange',
         key: 'priceChange',
         align: 'right',
-        width: 100,
+        width: 200,
+        render: (priceChange: number) => 
+             (
+                <Statistic
+                    value={priceChange}
+                    precision={2}
+                    valueStyle={{ color: priceChange > 0 ? '#3f8600' : '#cf1322', fontSize: 14 }}
+                    prefix={priceChange > 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
+                    suffix="%"
+                />
+            )
     },
     {
         title: 'TVL',
@@ -54,9 +65,10 @@ const columns: ColumnsType<TokenTypeData> = [
 
 
 
-const TokensTable = ({ tokens, isLoading, refetchTokens }: any) => {
+const TokensTable = ({ tokens, tokensLoading, refetchTokens }: any) => {
 
-    console.log(tokens)
+    console.log(tokensLoading);
+
     const data: TokenTypeData[] = [
         ...tokens.map((token: any, index: number) => {
             return {
@@ -73,11 +85,16 @@ const TokensTable = ({ tokens, isLoading, refetchTokens }: any) => {
 
     return (
         <div>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
+      <h1 style={{marginRight: 16}}>Top Pools</h1>
+            <div style={{ marginBottom: 16 }}>
+            <Button onClick={refetchTokens} loading={tokensLoading}>Refresh</Button>
+            </div>
+            </div>
         <Table
-          // bordered={true}
           columns={columns}
           dataSource={data}
-          loading={isLoading}
+          loading={tokensLoading}
           pagination={{ position: ["bottomCenter"] }}
         />
       </div>

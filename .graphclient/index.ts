@@ -6281,7 +6281,7 @@ export const getTopPoolsByTVLDocument = gql`
   pools(
     orderBy: totalValueLockedUSD
     orderDirection: desc
-    first: 10
+    first: 50
     where: {volumeUSD_gt: 10000, totalValueLockedUSD_gt: 1000000}
   ) {
     token0 {
@@ -6306,7 +6306,7 @@ export const getTopPoolsByTVLDocument = gql`
 export const getTokensDocument = gql`
     query getTokens {
   tokens(
-    first: 10
+    first: 100
     orderBy: totalValueLockedUSD
     orderDirection: desc
     where: {volumeUSD_gt: 10000, totalValueLockedUSD_gt: 1000000}
