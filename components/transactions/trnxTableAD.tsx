@@ -145,8 +145,7 @@ const columns: ColumnsType<TransactionType> = [
 ];
 const TransactionsTable = ({ transactions, trnxLoading, refetchTransactions }: {
     transactions: Transaction[],
-    trnxLoading?: boolean
-    refetchTransaction: Function}) => {
+    trnxLoading?: boolean}) => {
 
       console.log(transactions)
 const trxFiltered = transactionFilter(transactions);

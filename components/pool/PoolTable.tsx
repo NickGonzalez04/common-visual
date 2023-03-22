@@ -1,5 +1,5 @@
-import { border } from "@chakra-ui/react";
-import {  Button, Table, Spin } from "antd";
+
+import {  Button, Table } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 
 // Helper Functions
@@ -47,7 +47,7 @@ const columns: ColumnsType<PoolDataType> = [
 
 
 
-const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }: any) => {
+const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }) => {
   const data: PoolDataType[] = [
     ...topPools.map((pool: any, index: number) => {
       console.log(pool)

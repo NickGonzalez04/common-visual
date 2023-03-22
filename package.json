@@ -18,6 +18,7 @@
     "@types/node": "18.15.3",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
     "antd": "^5.3.2",
     "dayjs": "^1.11.7",
     "eslint": "8.36.0",
@@ -32,7 +33,9 @@
     "@graphprotocol/client-cli": "^2.2.20",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "eslint-config-prettier": "^8.8.0",
     "jest": "^29.5.0",
-    "jest-environment-jsdom": "^29.5.0"
+    "jest-environment-jsdom": "^29.5.0",
+    "prettier": "2.8.6"
   }
 }
