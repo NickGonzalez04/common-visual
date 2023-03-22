@@ -147,7 +147,7 @@ const TransactionsTable = ({ transactions, trnxLoading, refetchTransactions }: {
     transactions: Transaction[],
     trnxLoading?: boolean}) => {
 
-      console.log(transactions)
+      // console.log(transactions)
 const trxFiltered = transactionFilter(transactions);
 
   // const trxFiltered = transactions.map((trnxData: TransactionData) => {

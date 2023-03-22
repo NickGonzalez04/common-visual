@@ -45,9 +45,6 @@ const headerStyle: React.CSSProperties = {
 
 const PageLayout = ({topPools, poolsLoading, refetchTopPools, tokens, tokensLoading, refetchTokens, transactions, refetchTransactions}: any) => {
 
-  const onChange = (key: string) => {
-    console.log(key);
-  };
 
   const items: TabsProps['items'] = [
     {
@@ -71,7 +68,7 @@ const PageLayout = ({topPools, poolsLoading, refetchTopPools, tokens, tokensLoad
         <Layout>
             <Header style={headerStyle}>Common Visualizer</Header>    
             <Content style={contentStyle}>
-              <Tabs defaultActiveKey="1" items={items} onChange={onChange}/>
+              <Tabs defaultActiveKey="1" items={items} />
               </Content>
             <Footer style={footerStyle}>Common Visualizer ©2021 Created by Common</Footer>
         </Layout>

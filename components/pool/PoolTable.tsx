@@ -50,7 +50,7 @@ const columns: ColumnsType<PoolDataType> = [
 const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }) => {
   const data: PoolDataType[] = [
     ...topPools.map((pool: any, index: number) => {
-      console.log(pool)
+
       return {
         key: pool.id,
         index: index + 1,
@@ -67,7 +67,7 @@ const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }) => {
   return (
     <div>
       <div style={{display: "flex", justifyContent: "space-between"}}>
-      <h1 style={{marginRight: 16}}>Top Tokens</h1>
+      <h1 style={{marginRight: 16}}>Top Pools</h1>
        <div style={{ marginBottom: 16 }}>
       <Button onClick={refetchTopPools} loading={poolsLoading}>Refresh</Button>
       </div>

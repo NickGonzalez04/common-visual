@@ -67,7 +67,6 @@ const columns: ColumnsType<TokenTypeData> = [
 
 const TokensTable = ({ tokens, tokensLoading, refetchTokens }: any) => {
 
-    console.log(tokensLoading);
 
     const data: TokenTypeData[] = [
         ...tokens.map((token: any, index: number) => {
@@ -86,7 +85,7 @@ const TokensTable = ({ tokens, tokensLoading, refetchTokens }: any) => {
     return (
         <div>
             <div style={{display: "flex", justifyContent: "space-between"}}>
-      <h1 style={{marginRight: 16}}>Top Pools</h1>
+      <h1 style={{marginRight: 16}}>Top Tokens</h1>
             <div style={{ marginBottom: 16 }}>
             <Button onClick={refetchTokens} loading={tokensLoading}>Refresh</Button>
             </div>
