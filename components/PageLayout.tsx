@@ -1,5 +1,4 @@
-import { Tab } from "@chakra-ui/react";
-import { Tabs , Space, Layout } from "antd";
+import { Tabs , Layout } from "antd";
 import type { TabsProps } from "antd/lib/tabs";
 
 import OverView from "./overView";
