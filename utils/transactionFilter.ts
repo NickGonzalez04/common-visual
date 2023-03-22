@@ -1,64 +1,64 @@
 interface Transaction {
   mints: Array<{
-    timestamp: string;
+    timestamp: string
     transaction: {
-      id: string;
-    };
+      id: string
+    }
     pool: {
       token0: {
-        id: string;
-        symbol: string;
-      };
+        id: string
+        symbol: string
+      }
       token1: {
-        id: string;
-        symbol: string;
-      };
-    };
-    origin: string;
-    amount0: string;
-    amount1: string;
-    amountUSD: string;
-  }>;
+        id: string
+        symbol: string
+      }
+    }
+    origin: string
+    amount0: string
+    amount1: string
+    amountUSD: string
+  }>
   swaps: Array<{
-    timestamp: string;
+    timestamp: string
     transaction: {
-      id: string;
-    };
+      id: string
+    }
     pool: {
       token0: {
-        id: string;
-        symbol: string;
-      };
+        id: string
+        symbol: string
+      }
       token1: {
-        id: string;
-        symbol: string;
-      };
-    };
-    origin: string;
-    amount0: string;
-    amount1: string;
-    amountUSD: string;
-  }>;
+        id: string
+        symbol: string
+      }
+    }
+    origin: string
+    amount0: string
+    amount1: string
+    amountUSD: string
+  }>
   burns: Array<{
-    timestamp: string;
+    timestamp: string
     transaction: {
-      id: string;
-    };
+      id: string
+    }
     pool: {
       token0: {
-        id: string;
-        symbol: string;
-      };
+        id: string
+        symbol: string
+      }
       token1: {
-        id: string;
-        symbol: string;
-      };
-    };
-    owner: string;
-    amount0: string;
-    amount1: string;
-    amountUSD: string;
-  }>;
+        id: string
+        symbol: string
+      }
+    }
+    owner: string
+    amount0: string
+    amount1: string
+    amountUSD: string
+  }>
 }
 
 // This function is used to filter transactions based on the type of transaction executed

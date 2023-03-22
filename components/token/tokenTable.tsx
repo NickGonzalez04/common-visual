@@ -20,21 +20,21 @@ const columns: ColumnsType<TokenTypeData> = [
     title: '#',
     dataIndex: 'index',
     key: 'index',
-    width: 50,
+    width: 50
   },
   {
     title: 'Token',
     dataIndex: 'token',
     key: 'token',
     align: 'center',
-    width: 200,
+    width: 200
   },
   {
     title: 'Price',
     dataIndex: 'price',
     key: 'price',
     align: 'right',
-    width: 100,
+    width: 100
   },
   {
     title: 'Price Change',
@@ -58,8 +58,8 @@ const columns: ColumnsType<TokenTypeData> = [
     dataIndex: 'tvl',
     key: 'tvl',
     align: 'right',
-    width: 100,
-  },
+    width: 100
+  }
 ]
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -72,7 +72,7 @@ const TokenTable = ({ tokens, tokensLoading, refetchTokens }: any) => {
         token: token.name,
         price: priceFormat(token.tokenDayData[0].priceUSD),
         priceChange: Math.abs(getTokenPriceChange(token.tokenDayData[0].open, token.tokenDayData[0].close)).toFixed(2),
-        tvl: priceFormat(token.totalValueLockedUSD),
+        tvl: priceFormat(token.totalValueLockedUSD)
       }
     }
     )
@@ -95,4 +95,4 @@ const TokenTable = ({ tokens, tokensLoading, refetchTokens }: any) => {
   )
 }
 
-export default TokenTable;
+export default TokenTable

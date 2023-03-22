@@ -1,38 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 import {
-  getTransactionsQuery,
+  type getTransactionsQuery,
   getTransactionsDocument,
-  execute,
-} from "../.graphclient";
-import transactionFilter from "../utils/transactionFilter";
+  execute
+} from '../.graphclient'
 
-export function useFetchTransactions() {
-  const [transactions, setTransactions] = useState<getTransactionsQuery[]>([]);
-  const [trnxLoading, setTrnxLoading] = useState<boolean>(false);
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function useFetchTransactions () {
+  const [transactions, setTransactions] = useState<getTransactionsQuery[]>([])
+  const [trnxLoading, setTrnxLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    setTrnxLoading(true);
+    setTrnxLoading(true)
     execute(getTransactionsDocument, {})
       .then((response) => {
-        setTrnxLoading(false);
-        setTransactions(response?.data.transactions);
+        setTrnxLoading(false)
+        setTransactions(response?.data.transactions)
       })
       .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+        console.log(error)
+      })
+  }, [])
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const refetchTransactions = () => {
-    setTrnxLoading(true);
+    setTrnxLoading(true)
     execute(getTransactionsDocument, {})
       .then((response) => {
-        setTrnxLoading(false);
-        setTransactions(response?.data.transactions);
+        setTrnxLoading(false)
+        setTransactions(response?.data.transactions)
       })
       .catch((error) => {
-        console.log(error);
-      });
+        console.log(error)
+      })
   };
 
-  return { transactions, trnxLoading, refetchTransactions };
+  return { transactions, trnxLoading, refetchTransactions }
 }
