@@ -1,18 +1,18 @@
-import { Button, Table, Statistic } from "antd";
-import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
-import type { ColumnsType } from 'antd/es/table';
+import { Button, Table, Statistic } from 'antd'
+import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons'
+import type { ColumnsType } from 'antd/es/table'
 
-import priceFormat from "../../utils/priceFormat";
-import getTokenPriceChange from "../../utils/priceDifference";
+import priceFormat from '../../utils/priceFormat'
+import getTokenPriceChange from '../../utils/priceDifference'
 
 interface TokenTypeData {
-    key: string;
-    index: number;
-    title: string;
-    token: string;
-    price: string;
-    priceChange: string;
-    tvl: string;
+    key: string
+    index: number
+    title: string
+    token: string
+    price: string
+    priceChange: string
+    tvl: string
 }
 
 
@@ -50,7 +50,7 @@ const columns: ColumnsType<TokenTypeData> = [
                     precision={2}
                     valueStyle={{ color: priceChange > 0 ? '#3f8600' : '#cf1322', fontSize: 14 }}
                     prefix={priceChange > 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
-                    suffix="%"
+                    suffix='%'
                 />
             )
     },
@@ -61,7 +61,7 @@ const columns: ColumnsType<TokenTypeData> = [
         align: 'right',
         width: 100,
     },
-];
+]
 
 
 
@@ -80,11 +80,11 @@ const TokensTable = ({ tokens, tokensLoading, refetchTokens }: any) => {
             }
         }
         )
-    ];
+    ]
 
     return (
         <div>
-            <div style={{display: "flex", justifyContent: "space-between"}}>
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
       <h1 style={{marginRight: 16}}>Top Tokens</h1>
             <div style={{ marginBottom: 16 }}>
             <Button onClick={refetchTokens} loading={tokensLoading}>Refresh</Button>
@@ -94,10 +94,10 @@ const TokensTable = ({ tokens, tokensLoading, refetchTokens }: any) => {
           columns={columns}
           dataSource={data}
           loading={tokensLoading}
-          pagination={{ position: ["bottomCenter"] }}
+          pagination={{ position: ['bottomCenter'] }}
         />
       </div>
-    );
+    )
     }
 
-export default TokensTable;
+export default TokensTable

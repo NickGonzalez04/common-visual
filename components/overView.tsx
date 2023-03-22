@@ -13,8 +13,8 @@ const OverView = ({
   refetchTokens,
   transactions,
   trnxLoading,
-  // refetchTransactions,
-}: any) => {
+}: // refetchTransactions,
+any) => {
   return (
     <div>
       <PoolsTable

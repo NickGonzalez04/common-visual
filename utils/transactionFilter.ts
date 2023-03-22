@@ -1,8 +1,5 @@
-
-
-
 interface Transaction {
-  mints: {
+  mints: Array<{
     timestamp: string;
     transaction: {
       id: string;
@@ -21,8 +18,8 @@ interface Transaction {
     amount0: string;
     amount1: string;
     amountUSD: string;
-  }[];
-  swaps: {
+  }>;
+  swaps: Array<{
     timestamp: string;
     transaction: {
       id: string;
@@ -41,8 +38,8 @@ interface Transaction {
     amount0: string;
     amount1: string;
     amountUSD: string;
-  }[];
-  burns: {
+  }>;
+  burns: Array<{
     timestamp: string;
     transaction: {
       id: string;
@@ -61,7 +58,7 @@ interface Transaction {
     amount0: string;
     amount1: string;
     amountUSD: string;
-  }[];
+  }>;
 }
 
 // This function is used to filter transactions based on the type of transaction executed
@@ -70,9 +67,8 @@ interface Transaction {
 export default function transactionFilter(transactions: Transaction[]) {
   return transactions.map(({ mints, swaps, burns, ...rest }) => ({
     ...rest,
-    ...(mints.length && { mints }),
-    ...(swaps.length && { swaps }),
-    ...(burns.length && { burns }),
+    ...(mints.length > 0 && { mints }),
+    ...(swaps.length > 0 && { swaps }),
+    ...(burns.length > 0 && { burns }),
   }));
 }
-

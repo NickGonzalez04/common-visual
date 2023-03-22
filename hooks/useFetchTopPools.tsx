@@ -1,9 +1,9 @@
-
-import { useEffect, useState } from 'react';
-import { execute,
-    getTopPoolsByTVLDocument,
-    getTopPoolsByTVLQuery } from '../.graphclient';
-
+import { useEffect, useState } from "react";
+import {
+  execute,
+  getTopPoolsByTVLDocument,
+  getTopPoolsByTVLQuery,
+} from "../.graphclient";
 
 export interface Pools {
   id: string;
@@ -12,17 +12,17 @@ export interface Pools {
       id: string;
       volumeUSD: string;
     }
-  ],
+  ];
   token0: {
     id: string;
     symbol: string;
     name: string;
-  },
+  };
   token1: {
     id: string;
     symbol: string;
     name: string;
-  },
+  };
   totalValueLocked: string;
 }
 
@@ -31,28 +31,29 @@ export function useFetchTopPools() {
   const [poolsLoading, setPoolsLoading] = useState<boolean>(false);
   const [topPoolsData, setTopPoolsData] = useState<Pools[]>([]);
 
-
   useEffect(() => {
     setPoolsLoading(true);
-     execute(getTopPoolsByTVLDocument, {}).then((response) => {
+    execute(getTopPoolsByTVLDocument, {})
+      .then((response) => {
         setPoolsLoading(false);
         setTopPools(response?.data.pools);
-     }).catch((error) => {
-      console.log(error);
-      });;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
-
 
   const refetchTopPools = () => {
     setPoolsLoading(true);
-    execute(getTopPoolsByTVLDocument, {}).then((response) => {
-      setPoolsLoading(false);
-      setTopPools(response?.data.pools);
-    }).catch((error) => {
-      console.log(error);
-      });;
-  }
-
+    execute(getTopPoolsByTVLDocument, {})
+      .then((response) => {
+        setPoolsLoading(false);
+        setTopPools(response?.data.pools);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return { topPools, poolsLoading, refetchTopPools };
 }

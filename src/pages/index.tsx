@@ -1,15 +1,15 @@
-import Head from "next/head"
-import { useFetchTopPools } from "../../hooks/useFetchTopPools"
-import { useFetchTokens } from "../../hooks/useFetchTokens"
-import { useFetchTransactions } from "../../hooks/useFetchTransactions"
+import Head from "next/head";
+import { useFetchTopPools } from "../../hooks/useFetchTopPools";
+import { useFetchTokens } from "../../hooks/useFetchTokens";
+import { useFetchTransactions } from "../../hooks/useFetchTransactions";
 
-import PageLayout from '../../components/PageLayout'
+import PageLayout from "../../components/PageLayout";
 
 export default function Home(): JSX.Element {
-  const { topPools, poolsLoading, refetchTopPools } = useFetchTopPools()
-  const { tokens, isLoading, refetchTokens } = useFetchTokens()
+  const { topPools, poolsLoading, refetchTopPools } = useFetchTopPools();
+  const { tokens, isLoading, refetchTokens } = useFetchTokens();
   const { transactions, trnxLoading, refetchTransactions } =
-    useFetchTransactions()
+    useFetchTransactions();
 
   return (
     <>
