@@ -1,15 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
-import TransactionsTable from "../../components/transactions/trnxTable";
 import { useFetchTopPools } from "../../hooks/useFetchTopPools";
 import { useFetchTokens } from "../../hooks/useFetchTokens";
 import { useFetchTransactions } from "../../hooks/useFetchTransactions";
 
-import OverView from "../../components/overView";
 import PageLayout from "../../components/pageLayout";
 
 // const inter = Inter({ subsets: ['latin'] })
@@ -17,9 +14,8 @@ import PageLayout from "../../components/pageLayout";
 export default function Home() {
   const { topPools, poolsLoading, refetchTopPools } = useFetchTopPools();
   const { tokens, isLoading, refetchTokens } = useFetchTokens();
-  const { transactions, trnxLoading} = useFetchTransactions();
+  const { transactions, trnxLoading } = useFetchTransactions();
 
-    console.log("tokens", tokens);
 
   return (
     <>
@@ -29,7 +25,16 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <PageLayout topPools={topPools} poolsLoading={poolsLoading} tokens={tokens} />
+      <PageLayout
+        topPools={topPools}
+        poolsLoading={poolsLoading}
+        tokens={tokens}
+        tokensLoading={isLoading}
+        transactions={transactions}
+        trnxLoading={trnxLoading}
+        refetchTopPools={refetchTopPools}
+        refetchTokens={refetchTokens}
+      />
     </>
   );
 }
