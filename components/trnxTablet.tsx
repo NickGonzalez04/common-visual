@@ -1,6 +1,6 @@
-import { Button, Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import { type Transaction, TransactionType } from "../../types";
+import { Button, Table } from 'antd'
+import type { ColumnsType } from 'antd/es/table'
+import { type Transaction } from '../types'
 // import { useFetchTransactions } from '../../hooks/useFetchTransactions'
 // import Link from 'next/link'
 // import formatTrxTime from '../../utils/dateFormat'
@@ -20,131 +20,131 @@ import { type Transaction, TransactionType } from "../../types";
 // }
 
 interface TransactionData {
-  id: string;
-  timestamp: string;
+  id: string
+  timestamp: string
   mints: Array<{
-    timestamp: string;
+    timestamp: string
     transaction: {
-      id: string;
-    };
+      id: string
+    }
     pool: {
       token0: {
-        id: string;
-        symbol: string;
-      };
+        id: string
+        symbol: string
+      }
       token1: {
-        id: string;
-        symbol: string;
-      };
-    };
-    origin: string;
-    amount0: string;
-    amount1: string;
-    amountUSD: string;
-  }>;
+        id: string
+        symbol: string
+      }
+    }
+    origin: string
+    amount0: string
+    amount1: string
+    amountUSD: string
+  }>
   swaps: Array<{
-    timestamp: string;
+    timestamp: string
     transaction: {
-      id: string;
-    };
+      id: string
+    }
     pool: {
       token0: {
-        id: string;
-        symbol: string;
-      };
+        id: string
+        symbol: string
+      }
       token1: {
-        id: string;
-        symbol: string;
-      };
-    };
-    origin: string;
-    amount0: string;
-    amount1: string;
-    amountUSD: string;
-  }>;
+        id: string
+        symbol: string
+      }
+    }
+    origin: string
+    amount0: string
+    amount1: string
+    amountUSD: string
+  }>
   burns: Array<{
-    timestamp: string;
+    timestamp: string
     transaction: {
-      id: string;
-    };
+      id: string
+    }
     pool: {
       token0: {
-        id: string;
-        symbol: string;
-      };
+        id: string
+        symbol: string
+      }
       token1: {
-        id: string;
-        symbol: string;
-      };
-    };
-    owner: string;
-    amount0: string;
-    amount1: string;
-    amountUSD: string;
-  }>;
+        id: string
+        symbol: string
+      }
+    }
+    owner: string
+    amount0: string
+    amount1: string
+    amountUSD: string
+  }>
 }
 
-interface TransactionReturn {
-  transaction: TransactionData[];
-}
+// interface TransactionReturn {
+//   transaction: TransactionData[]
+// }
 
 const columns: ColumnsType<TransactionData> = [
   {
-    title: "#",
-    dataIndex: "index",
-    key: "index",
-    width: 50,
+    title: '#',
+    dataIndex: 'index',
+    key: 'index',
+    width: 50
   },
   {
-    title: "Type",
-    dataIndex: "type",
-    key: "type",
-    align: "center",
-    width: 200,
+    title: 'Type',
+    dataIndex: 'type',
+    key: 'type',
+    align: 'center',
+    width: 200
   },
   {
-    title: "Token Value",
-    dataIndex: "amountUSD",
-    key: "amountUSD",
-    align: "right",
-    width: 100,
+    title: 'Token Value',
+    dataIndex: 'amountUSD',
+    key: 'amountUSD',
+    align: 'right',
+    width: 100
   },
   {
-    title: "Token Amount",
-    dataIndex: "amountToken0",
-    key: "amountToken0",
-    align: "right",
-    width: 100,
+    title: 'Token Amount',
+    dataIndex: 'amountToken0',
+    key: 'amountToken0',
+    align: 'right',
+    width: 100
   },
   {
-    title: "Token Amount",
-    dataIndex: "amountToken1",
-    key: "amountToken1",
-    align: "right",
-    width: 100,
+    title: 'Token Amount',
+    dataIndex: 'amountToken1',
+    key: 'amountToken1',
+    align: 'right',
+    width: 100
   },
   {
-    title: "Account",
-    dataIndex: "sender",
-    key: "sender",
-    align: "right",
-    width: 100,
+    title: 'Account',
+    dataIndex: 'sender',
+    key: 'sender',
+    align: 'right',
+    width: 100
   },
   {
-    title: "Time",
-    dataIndex: "timeStamp",
-    key: "timeStamp",
-    align: "right",
-    width: 100,
-  },
-];
+    title: 'Time',
+    dataIndex: 'timeStamp',
+    key: 'timeStamp',
+    align: 'right',
+    width: 100
+  }
+]
 const TransactionsTable = ({
   transactions,
-  trnxLoading,
+  trnxLoading
 }: {
-  transactions: Transaction[];
-  trnxLoading?: boolean;
-}) => {
+  transactions: Transaction[]
+  trnxLoading?: boolean
+}): JSX.Element => {
   // console.log(transactions)
   // const trxFiltered = transactionFilter(transactions.mints, transactions.swaps, transactions.burns})
 
@@ -196,7 +196,7 @@ const TransactionsTable = ({
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h1 style={{ marginRight: 16 }}>Transactions</h1>
         <div style={{ marginBottom: 16 }}>
           <Button loading={trnxLoading}>Refresh</Button>
@@ -206,10 +206,10 @@ const TransactionsTable = ({
         loading={trnxLoading}
         columns={columns}
         // dataSource={data}
-        pagination={{ position: ["bottomCenter"] }}
+        pagination={{ position: ['bottomCenter'] }}
       />
     </div>
-  );
-};
+  )
+}
 
-export default TransactionsTable;
+export default TransactionsTable

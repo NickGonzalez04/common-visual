@@ -3,7 +3,7 @@ import { Button, Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 
 // Helper Functions
-import priceFormat from '../../utils/priceFormat'
+import priceFormat from '../utils/priceFormat'
 
 interface PoolDataType {
   key: string
@@ -40,7 +40,7 @@ const columns: ColumnsType<PoolDataType> = [
     key: 'volume',
     align: 'right',
     width: 300
-  }
+  },
 ]
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

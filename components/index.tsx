@@ -2,8 +2,8 @@ import { Tabs, Layout } from 'antd'
 import type { TabsProps } from 'antd/lib/tabs'
 
 import OverView from './overView'
-import PoolsTable from './pool/PoolTable'
-import TokenTable from './token/TokenTable'
+import PoolsTable from './poolTable'
+import TokenTable from './tokenTable'
 
 const { Header, Content, Footer } = Layout
 

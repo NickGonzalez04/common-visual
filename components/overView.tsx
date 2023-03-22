@@ -1,6 +1,6 @@
-import PoolsTable from './pool/PoolTable'
-import TokenTable from './token/TokenTable'
-import TransactionsTable from './transactions/trnxTableAD'
+import PoolsTable from "./poolTable";
+import TokenTable from "./tokenTable";
+import TransactionsTable from "./trnxTablet.tsx";
 
 const OverView = ({
   topPools,
@@ -10,7 +10,7 @@ const OverView = ({
   tokensLoading,
   refetchTokens,
   transactions,
-  trnxLoading
+  trnxLoading,
 }: // refetchTransactions,
 any): JSX.Element => {
   return (
@@ -31,7 +31,7 @@ any): JSX.Element => {
         // refetchTransactions={refetchTransactions}
       />
     </div>
-  )
-}
+  );
+};
 
-export default OverView
+export default OverView;
