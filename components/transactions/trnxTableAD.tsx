@@ -1,11 +1,11 @@
-import { Button, Table, Spin } from "antd";
+import { Button, Table } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 import { Transaction, TransactionType } from "../../types";
-import { useFetchTransactions } from "../../hooks/useFetchTransactions";
-import Link from "next/link";
-import formatTrxTime from "../../utils/dateFormat";
-import priceFormat from "../../utils/priceFormat";
-import transactionFilter from "../../utils/transactionFilter";
+// import { useFetchTransactions } from "../../hooks/useFetchTransactions";
+// import Link from "next/link";
+// import formatTrxTime from "../../utils/dateFormat";
+// import priceFormat from "../../utils/priceFormat";
+// import transactionFilter from "../../utils/transactionFilter";
 
 
 
@@ -91,7 +91,7 @@ type TransactionData = {
       transaction: TransactionData[]
     }
 
-const columns: ColumnsType<TransactionType> = [
+const columns: ColumnsType<TransactionData> = [
     {
         title: '#',
         dataIndex: 'index',
@@ -143,12 +143,13 @@ const columns: ColumnsType<TransactionType> = [
 
 
 ];
-const TransactionsTable = ({ transactions, trnxLoading, refetchTransactions }: {
+const TransactionsTable = ({ transactions, trnxLoading}: {
     transactions: Transaction[],
-    trnxLoading?: boolean}) => {
+    trnxLoading?: boolean,
+    }) => {
 
       // console.log(transactions)
-const trxFiltered = transactionFilter(transactions);
+// const trxFiltered = transactionFilter(transactions.mints, transactions.swaps, transactions.burns});
 
   // const trxFiltered = transactions.map((trnxData: TransactionData) => {
     
@@ -202,7 +203,7 @@ const trxFiltered = transactionFilter(transactions);
           <div style={{display: "flex", justifyContent: "space-between"}}>
       <h1 style={{marginRight: 16}}>Transactions</h1>
             <div style={{ marginBottom: 16 }}>
-            <Button onClick={refetchTransactions} loading={trnxLoading}>Refresh</Button>
+            <Button loading={trnxLoading}>Refresh</Button>
             </div>
             </div>
       <Table 

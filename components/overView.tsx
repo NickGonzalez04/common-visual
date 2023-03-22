@@ -13,7 +13,7 @@ const OverView = ({
   refetchTokens,
   transactions,
   trnxLoading,
-  refetchTransactions,
+  // refetchTransactions,
 }: any) => {
   return (
     <div>
@@ -30,7 +30,7 @@ const OverView = ({
       <TransactionsTable
         transactions={transactions}
         trnxLoading={trnxLoading}
-        refetchTransactions={refetchTransactions}
+        // refetchTransactions={refetchTransactions}
       />
     </div>
   );

@@ -47,7 +47,11 @@ const columns: ColumnsType<PoolDataType> = [
 
 
 
-const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }) => {
+const PoolsTable = ({ topPools, poolsLoading, refetchTopPools }:{
+  topPools: any;
+  poolsLoading: boolean;
+  refetchTopPools: () => void;
+}) => {
   const data: PoolDataType[] = [
     ...topPools.map((pool: any, index: number) => {
 
