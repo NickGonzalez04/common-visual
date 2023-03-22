@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import PageLayout from '../../components/pageLayout'
+import PageLayout from '../../components/index'
 
 import { useFetchTopPools } from '../../hooks/useFetchTopPools'
 import { useFetchTokens } from '../../hooks/useFetchTokens'
