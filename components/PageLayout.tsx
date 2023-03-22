@@ -75,4 +75,4 @@ const PageLayout = ({topPools, poolsLoading, refetchTopPools, tokens, tokensLoad
 }
 
 
-export default PageLayout;
+export default PageLayout
