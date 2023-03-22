@@ -1,4 +1,3 @@
-
 import PoolsTable from './pool/PoolTable'
 import TokenTable from './token/TokenTable'
 import TransactionsTable from './transactions/trnxTableAD'

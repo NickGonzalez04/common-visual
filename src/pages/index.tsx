@@ -1,9 +1,9 @@
 import Head from 'next/head'
+import PageLayout from '../../components/pageLayout'
+
 import { useFetchTopPools } from '../../hooks/useFetchTopPools'
 import { useFetchTokens } from '../../hooks/useFetchTokens'
 import { useFetchTransactions } from '../../hooks/useFetchTransactions'
-
-import PageLayout from '../../components/pageLayout'
 
 export default function Home (): JSX.Element {
   const { topPools, poolsLoading, refetchTopPools } = useFetchTopPools()

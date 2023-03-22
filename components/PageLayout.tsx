@@ -35,33 +35,67 @@ const footerStyle: React.CSSProperties = {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const PageLayout = ({topPools, poolsLoading, refetchTopPools, tokens, tokensLoading, refetchTokens, transactions, refetchTransactions}: any) => {
+const PageLayout = ({
+  topPools,
+  poolsLoading,
+  refetchTopPools,
+  tokens,
+  tokensLoading,
+  refetchTokens,
+  transactions,
+  refetchTransactions
+}: any): JSX.Element => {
   const items: TabsProps['items'] = [
     {
       key: '1',
       label: 'Overview',
-      children: <OverView topPools={topPools} poolsLoading={poolsLoading} refetchTopPools={refetchTopPools} tokens={tokens}  tokensLoading={tokensLoading} refetchTokens={refetchTokens} transactions={transactions} refetchTransaction={refetchTransactions}/>
+      children: (
+        <OverView
+          topPools={topPools}
+          poolsLoading={poolsLoading}
+          refetchTopPools={refetchTopPools}
+          tokens={tokens}
+          tokensLoading={tokensLoading}
+          refetchTokens={refetchTokens}
+          transactions={transactions}
+          refetchTransaction={refetchTransactions}
+        />
+      )
     },
     {
       key: '2',
       label: 'Pools',
-      children: <PoolsTable topPools={topPools} poolsLoading={poolsLoading} refetchTopPools={refetchTopPools}/>
+      children: (
+        <PoolsTable
+          topPools={topPools}
+          poolsLoading={poolsLoading}
+          refetchTopPools={refetchTopPools}
+        />
+      )
     },
     {
       key: '3',
       label: 'Tokens',
-      children: <TokenTable tokens={tokens} tokensLoading={tokensLoading} refetchTokens={refetchTokens} />
+      children: (
+        <TokenTable
+          tokens={tokens}
+          tokensLoading={tokensLoading}
+          refetchTokens={refetchTokens}
+        />
+      )
     }
   ]
 
   return (
-        <Layout>
-            <Header style={headerStyle}>Common Visualizer</Header>
-            <Content style={contentStyle}>
-              <Tabs defaultActiveKey='1' items={items} />
-              </Content>
-            <Footer style={footerStyle}>Common Visualizer ©2021 Created by Common</Footer>
-        </Layout>
+    <Layout>
+      <Header style={headerStyle}>Common Visualizer</Header>
+      <Content style={contentStyle}>
+        <Tabs defaultActiveKey="1" items={items} />
+      </Content>
+      <Footer style={footerStyle}>
+        Common Visualizer ©2021 Created by Common
+      </Footer>
+    </Layout>
   )
 }
 
