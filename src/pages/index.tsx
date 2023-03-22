@@ -3,12 +3,12 @@ import Image from "next/image";
 import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import PoolsTable from "../../components/pool/PoolsTable";
+
 import TransactionsTable from "../../components/transactions/trnxTable";
 import { useFetchTopPools } from "../../hooks/useFetchTopPools";
 import { useFetchTokens } from "../../hooks/useFetchTokens";
 import { useFetchTransactions } from "../../hooks/useFetchTransactions";
-import TokensTable from "../../components/token/tokenTable";
+
 import OverView from "../../components/overView";
 import PageLayout from "../../components/pageLayout";
 
