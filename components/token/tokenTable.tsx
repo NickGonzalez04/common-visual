@@ -1,4 +1,4 @@
-import { Button, Table, Spin, Statistic } from "antd";
+import { Button, Table, Statistic } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
