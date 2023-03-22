@@ -71,10 +71,10 @@ const PoolsTable = ({
               ? 'BTC'
               : pool.token1.symbol),
         tvl: priceFormat(pool.totalValueLockedUSD),
-        volume: priceFormat(pool.poolDayData[0].volumeUSD),
-      };
-    }),
-  ];
+        volume: priceFormat(pool.poolDayData[0].volumeUSD)
+      }
+    })
+  ]
 
   return (
     <div>
@@ -94,8 +94,7 @@ const PoolsTable = ({
         pagination={{ position: ['bottomCenter'] }}
       />
     </div>
-  );
-};
+  )
+}
 
 export default PoolsTable
-

@@ -18,7 +18,6 @@ const headerStyle: React.CSSProperties = {
   backgroundColor: 'rgb(31, 33, 40)'
 }
 
-
 const contentStyle: React.CSSProperties = {
   textAlign: 'center',
   width: '100%',
@@ -35,6 +34,7 @@ const footerStyle: React.CSSProperties = {
   color: '#fff'
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const PageLayout = ({topPools, poolsLoading, refetchTopPools, tokens, tokensLoading, refetchTokens, transactions, refetchTransactions}: any) => {
   const items: TabsProps['items'] = [
     {
