@@ -100,5 +100,4 @@ const TokensTable = ({ tokens, tokensLoading, refetchTokens }: any) => {
     );
     }
 
-
-    export default TokensTable;
+export default TokensTable;
