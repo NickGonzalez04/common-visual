@@ -1,6 +1,6 @@
-import PoolsTable from "./poolTable";
-import TokenTable from "./tokenTable";
-import TransactionsTable from "./trnxTablet.tsx";
+import PoolsTable from './poolTable'
+import TokenTable from './tokenTable'
+import TransactionsTable from './trnxTablet'
 
 const OverView = ({
   topPools,

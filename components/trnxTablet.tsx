@@ -1,23 +1,24 @@
-import { Button, Table } from 'antd'
+import { Button, Table, Tooltip } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { type Transaction } from '../types'
 // import { useFetchTransactions } from '../../hooks/useFetchTransactions'
-// import Link from 'next/link'
+import Link from 'next/link'
 // import formatTrxTime from '../../utils/dateFormat'
-// import priceFormat from '../../utils/priceFormat'
+import priceFormat from '../utils/priceFormat'
 import transactionFilter from './../utils/transactionFilter'
+import { color } from 'framer-motion'
 
-// interface TransactionTypeData {
-//     key: string
-//     index: number
-//     title: string
-//     type: string
-//     tokenValue: string
-//     tokenAmount0: string
-//     tokenAmount1: string
-//     account: string
-//     timeStamp: string
-// }
+interface TransactionTypeData {
+  key: string
+  index: number
+  title: string
+  type: string
+  tokenValue: string
+  tokenAmount0: string
+  tokenAmount1: string
+  account: string
+  timeStamp: string
+}
 
 interface TransactionData {
   id: string
@@ -88,56 +89,48 @@ interface TransactionData {
 //   transaction: TransactionData[]
 // }
 
-const columns: ColumnsType<TransactionData> = [
-  {
-    title: '#',
-    dataIndex: 'index',
-    key: 'index',
-    width: 50
-  },
+const columns: ColumnsType = [
   {
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
     align: 'center',
-    width: 200
+    width: 100,
   },
   {
     title: 'Token Value',
     dataIndex: 'amountUSD',
     key: 'amountUSD',
     align: 'right',
-    width: 100
+    width: 150,
   },
   {
     title: 'Token Amount',
     dataIndex: 'amountToken0',
     key: 'amountToken0',
     align: 'right',
-    width: 100
+    width: 150,
   },
   {
     title: 'Token Amount',
     dataIndex: 'amountToken1',
     key: 'amountToken1',
     align: 'right',
-    width: 100
+    width: 150,
   },
   {
     title: 'Account',
     dataIndex: 'sender',
     key: 'sender',
     align: 'right',
-    width: 100
-  },
-  {
-    title: 'Time',
-    dataIndex: 'timeStamp',
-    key: 'timeStamp',
-    align: 'right',
-    width: 100
+    width: 100,
+    render: (sender: string) => (
+      <Tooltip>
+        <Link href={`https://etherscan.io/address/${sender}`}>{sender}</Link>
+      </Tooltip>
+    )
   }
-]
+];
 const TransactionsTable = ({
   transactions,
   trnxLoading
@@ -149,51 +142,28 @@ const TransactionsTable = ({
   const trxFiltered = transactionFilter(transactions)
 
   console.log(trxFiltered)
-  // const trxFiltered = transactions.map((trnxData: TransactionData) => {
+  const trx = trxFiltered.map((trnxData, index) => {
+    console.log(trnxData)
+    return {
+      type: trnxData.type,
+      //  hash: trnxData.transaction[0].origin,
+      amountUSD: priceFormat(trnxData.transaction[0].amountUSD),
+      amountToken0:
+        Math.abs(trnxData.transaction[0].amount0).toFixed(2) +
+        ' ' +
+        trnxData.transaction[0].token0.symbol,
+      amountToken1:
+        Math.abs(trnxData.transaction[0].amount1).toFixed(2) +
+        ' ' +
+        trnxData.transaction[0].token1.symbol,
+      sender: 
+          `${trnxData.transaction[0].id.substring(0, 6) +
+            '...' +
+            trnxData.transaction[0].id.substring(38, 42).toLowerCase()}`,
+    };
+  })
 
-  //   const mint = trnxData.mints.map((trx) => {
-  //       return {
-  //          type: TransactionType.MINT,
-  //          hash: trx.id,
-  //             timestamp: trx.timestamp,
-  //             sender: trx.origin,
-  //             token0Symbol: trx.pool.token0.symbol,
-  //               token1Symbol: trx.pool.token1.symbol,
-  //               token0Address: trx.pool.token0.id,
-  //               token1Address: trx.pool.token1.id,
-  //               amountToken0: trx.amount0,
-  //               amountToken1: trx.amount1,
-  //       }
-  //     })
 
-  //     accum = [...accum, ...mint]
-
-  //     return accum
-  //   }, [])
-
-  // }
-
-  // const data: TransactionData[] = [
-  //   ...trxFiltered.map((transaction, index) => {
-  //       console.log(transaction.swaps)
-  //     return {
-  //       key: `${index}`,
-  //       index: index + 1,
-  //       title: `${transaction.swaps}`,
-  //       type: 'SWAP',
-  //       tokenValue: priceFormat(transaction.swaps[0].amountUSD),
-  //       tokenAmount0:
-  //         Math.abs(parseFloat(transaction.swaps[0].amount0)).toFixed(2) +
-  //         ' ',
-  //       tokenAmount1:
-  //         Math.abs(parseFloat(transaction.swaps[0].amount1)).toFixed(2) +
-  //         ' ' ,
-  //       account: transaction.swaps[0].sender.substring(0,5).toLowerCase() + '...',
-  //       timeStamp: formatTrxTime(transaction.swaps[0].timestamp)
-  //     }
-
-  //   }),
-  // ]
 
   return (
     <div>
@@ -206,7 +176,7 @@ const TransactionsTable = ({
       <Table
         loading={trnxLoading}
         columns={columns}
-        // dataSource={data}
+        dataSource={trx}
         pagination={{ position: ['bottomCenter'] }}
       />
     </div>

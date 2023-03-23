@@ -1,12 +1,10 @@
 interface Transaction {
   id: string
   timestamp: string
-  mints: Mint[]
-  swaps: any[]
-  burns: any[]
+  type: TransactionTypeObject[]
 }
 
-interface Mint {
+interface TransactionTypeObject {
   id: string
   transaction: {
     id: string
@@ -31,10 +29,6 @@ interface Data {
   transactions: Transaction[]
 }
 
-interface Response {
-  data: Data
-}
-
 interface TransactionResponse {
   type: string
   transaction: any
@@ -44,7 +38,7 @@ interface TransactionResponse {
 // This function is used to filter transactions based on the type of transaction executed
 // Find the transaction type that is not equal to length of zero
 // If the transaction type is not equal to length of zero, then return the transaction type
-export default function transactionFilter (data: Data) {
+export default function transactionFilter (data: Data): TransactionResponse[] {
   const keysWithNonEmptyArrays: TransactionResponse[] = []
 
   console.log('data', data)
@@ -53,7 +47,7 @@ export default function transactionFilter (data: Data) {
       // console.log('key1', transaction[key]);
       if (Array.isArray(transaction[key]) && transaction[key].length > 0) {
         // console.log('key2', key);
-        keysWithNonEmptyArrays.push({ key, transaction })
+        keysWithNonEmptyArrays.push({ type: key, transaction: transaction[key] })
       }
     }
   }
