@@ -5,7 +5,7 @@ import { type Transaction } from '../types'
 // import Link from 'next/link'
 // import formatTrxTime from '../../utils/dateFormat'
 // import priceFormat from '../../utils/priceFormat'
-// import transactionFilter from '../../utils/transactionFilter'
+import transactionFilter from './../utils/transactionFilter'
 
 // interface TransactionTypeData {
 //     key: string
@@ -142,12 +142,13 @@ const TransactionsTable = ({
   transactions,
   trnxLoading
 }: {
-  transactions: Transaction[]
-  trnxLoading?: boolean
+  // transactions: Transaction[]
+  // trnxLoading?: boolean
 }): JSX.Element => {
-  // console.log(transactions)
-  // const trxFiltered = transactionFilter(transactions.mints, transactions.swaps, transactions.burns})
+  console.log(transactions)
+  const trxFiltered = transactionFilter(transactions)
 
+  console.log(trxFiltered)
   // const trxFiltered = transactions.map((trnxData: TransactionData) => {
 
   //   const mint = trnxData.mints.map((trx) => {

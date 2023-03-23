@@ -41,7 +41,6 @@ query getTokens {
     }
 }
 
-
 query getTransactions {
      transactions(first: 10, orderBy: timestamp, orderDirection:desc){
       id
