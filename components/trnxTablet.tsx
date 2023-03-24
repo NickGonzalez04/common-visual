@@ -160,15 +160,10 @@ const TransactionsTable = ({
   transactions,
   trnxLoading
 }): JSX.Element => {
-
-  // const onChange = (pagination, filters) => {
-  //   console.log('params', pagination, filters)
-  // }
-
   const trxFiltered = transactionFilter(transactions)
 
-  const trx = trxFiltered.map((trnxData, index) => {
-   console.log(trnxData.transaction[0])
+  const trx = trxFiltered.map((trnxData) => {
+
     return {
       type: trnxData.type,
       //  hash: trnxData.transaction[0].origin,
