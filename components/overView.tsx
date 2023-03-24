@@ -11,8 +11,8 @@ const OverView = ({
   refetchTokens,
   transactions,
   trnxLoading,
-}: // refetchTransactions,
-any): JSX.Element => {
+  refetchTransactions
+}: any): JSX.Element => {
   return (
     <div>
       <PoolsTable
@@ -28,7 +28,7 @@ any): JSX.Element => {
       <TransactionsTable
         transactions={transactions}
         trnxLoading={trnxLoading}
-        // refetchTransactions={refetchTransactions}
+        refetchTransactions={refetchTransactions}
       />
     </div>
   )

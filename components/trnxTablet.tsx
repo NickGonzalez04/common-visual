@@ -151,7 +151,7 @@ const columns: ColumnsType = [
     width: 200,
   },
 ]
-const TransactionsTable = ({ transactions, trnxLoading }): JSX.Element => {
+const TransactionsTable = ({ transactions, trnxLoading, refetchTransactions }: any): JSX.Element => {
   const trxFiltered = transactionFilter(transactions)
 
   const trx = trxFiltered.map((trnxData) => {
@@ -177,7 +177,9 @@ const TransactionsTable = ({ transactions, trnxLoading }): JSX.Element => {
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h1 style={{ marginRight: 16 }}>Transactions</h1>
         <div style={{ marginBottom: 16 }}>
-          <Button loading={trnxLoading}>Refresh</Button>
+          <Button onClick={refetchTransactions} loading={trnxLoading}>
+            Refresh
+          </Button>
         </div>
       </div>
       <Table

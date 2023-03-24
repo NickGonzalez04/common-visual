@@ -44,7 +44,7 @@ const PageLayout = ({
   refetchTokens,
   transactions,
   trnxLoading,
-  refetchTransactions,
+  refetchTransactions
 }: any): JSX.Element => {
   const items: TabsProps['items'] = [
     {
@@ -60,7 +60,7 @@ const PageLayout = ({
           refetchTokens={refetchTokens}
           transactions={transactions}
           trnxLoading={trnxLoading}
-          refetchTransaction={refetchTransactions}
+          refetchTransactions={refetchTransactions}
         />
       )
     },
