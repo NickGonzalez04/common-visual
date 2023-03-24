@@ -137,7 +137,7 @@ const columns: ColumnsType = [
     align: 'right',
     width: 100,
     render: (hash: string) => (
-      <Tooltip>
+      <Tooltip title={`https://etherscan.io/address/${hash}`}>
         <Link href={`https://etherscan.io/address/${hash}`}>
           {hash.substring(0, 6) + '...' + hash.substring(38, 42)}
         </Link>
