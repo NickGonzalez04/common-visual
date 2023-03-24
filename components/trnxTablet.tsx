@@ -140,9 +140,11 @@ const columns: ColumnsType = [
     key: 'sender',
     align: 'right',
     width: 100,
-    render: (sender: string) => (
+    render: (hash: string) => (
       <Tooltip>
-        <Link href={`https://etherscan.io/address/${sender}`}>{sender}</Link>
+        <Link href={`https://etherscan.io/tx/${hash}`}>
+          {hash.substring(0, 6) + '...' + hash.substring(38, 42)}
+        </Link>
       </Tooltip>
     )
   },
@@ -166,25 +168,22 @@ const TransactionsTable = ({
   const trxFiltered = transactionFilter(transactions)
 
   const trx = trxFiltered.map((trnxData, index) => {
-   
+   console.log(trnxData.transaction[0])
     return {
       type: trnxData.type,
       //  hash: trnxData.transaction[0].origin,
       amountUSD: priceFormat(trnxData.transaction[0].amountUSD),
       amountToken0:
         Math.abs(trnxData.transaction[0].amount0).toFixed(2) +
-        ' ' +
+        " " +
         trnxData.transaction[0].token0.symbol,
       amountToken1:
         Math.abs(trnxData.transaction[0].amount1).toFixed(2) +
-        ' ' +
+        " " +
         trnxData.transaction[0].token1.symbol,
-      sender:
-          `${trnxData.transaction[0].id.substring(0, 4) +
-            '...' +
-            trnxData.transaction[0].id.substring(38, 42).toLowerCase()}`,
-      timestamp: formatTrxTime(trnxData.timestamp)
-    }
+      sender: trnxData.transaction[0].id,
+      timestamp: formatTrxTime(trnxData.timestamp),
+    };
   })
 
   return (
