@@ -79,16 +79,12 @@ interface TransactionData {
         symbol: string
       }
     }
-    owner: string
+    origin: string
     amount0: string
     amount1: string
     amountUSD: string
   }>
 }
-
-// interface TransactionReturn {
-//   transaction: TransactionData[]
-// }
 
 const columns: ColumnsType = [
   {
@@ -136,13 +132,13 @@ const columns: ColumnsType = [
   },
   {
     title: 'Account',
-    dataIndex: 'sender',
-    key: 'sender',
+    dataIndex: 'account',
+    key: 'account',
     align: 'right',
     width: 100,
     render: (hash: string) => (
       <Tooltip>
-        <Link href={`https://etherscan.io/tx/${hash}`}>
+        <Link href={`https://etherscan.io/address/${hash}`}>
           {hash.substring(0, 6) + '...' + hash.substring(38, 42)}
         </Link>
       </Tooltip>
@@ -176,7 +172,7 @@ const TransactionsTable = ({
         Math.abs(trnxData.transaction[0].amount1).toFixed(2) +
         " " +
         trnxData.transaction[0].token1.symbol,
-      sender: trnxData.transaction[0].id,
+      account: trnxData.transaction[0].origin,
       timestamp: formatTrxTime(trnxData.timestamp),
     };
   })

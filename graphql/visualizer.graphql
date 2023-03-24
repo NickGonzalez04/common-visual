@@ -42,68 +42,68 @@ query getTokens {
 }
 
 query getTransactions {
-     transactions(first: 100, orderBy: timestamp, orderDirection:desc){
+  transactions(first: 100, orderBy: timestamp, orderDirection: desc) {
+    id
+    timestamp
+    mints {
       id
-      timestamp
-      mints {
+      transaction {
         id
-        transaction {
-          id
-        }
-        token0 {
-          id
-          name
-          symbol
-        }
-        token1 {
-          id
-          name
-          symbol
-        }
-        sender
-        amountUSD
-        amount0
-        amount1
       }
-      swaps {
+      token0 {
         id
-        transaction {
-          id
-        }
-        token0 {
-          id
-          name
-          symbol
-        }
-        token1 {
-          id
-          name
-          symbol
-        }
-        sender
-        amountUSD
-        amount0
-        amount1
+        name
+        symbol
       }
-      burns {
+      token1 {
         id
-        transaction {
-          id
-        }
-        token0 {
-          id
-          name
-          symbol
-        }
-        token1 {
-          id
-          name
-          symbol
-        }
-        origin
-        amountUSD
-        amount0
-        amount1
+        name
+        symbol
       }
+      origin
+      amountUSD
+      amount0
+      amount1
     }
+    swaps {
+      id
+      transaction {
+        id
+      }
+      token0 {
+        id
+        name
+        symbol
+      }
+      token1 {
+        id
+        name
+        symbol
+      }
+      origin
+      amountUSD
+      amount0
+      amount1
+    }
+    burns {
+      id
+      transaction {
+        id
+      }
+      token0 {
+        id
+        name
+        symbol
+      }
+      token1 {
+        id
+        name
+        symbol
+      }
+      origin
+      amountUSD
+      amount0
+      amount1
+    }
+  }
 }

@@ -6264,10 +6264,10 @@ export type getTransactionsQueryVariables = Exact<{ [key: string]: never; }>;
 export type getTransactionsQuery = { transactions: Array<(
     Pick<Transaction, 'id' | 'timestamp'>
     & { mints: Array<Maybe<(
-      Pick<Mint, 'id' | 'sender' | 'amountUSD' | 'amount0' | 'amount1'>
+      Pick<Mint, 'id' | 'origin' | 'amountUSD' | 'amount0' | 'amount1'>
       & { transaction: Pick<Transaction, 'id'>, token0: Pick<Token, 'id' | 'name' | 'symbol'>, token1: Pick<Token, 'id' | 'name' | 'symbol'> }
     )>>, swaps: Array<Maybe<(
-      Pick<Swap, 'id' | 'sender' | 'amountUSD' | 'amount0' | 'amount1'>
+      Pick<Swap, 'id' | 'origin' | 'amountUSD' | 'amount0' | 'amount1'>
       & { transaction: Pick<Transaction, 'id'>, token0: Pick<Token, 'id' | 'name' | 'symbol'>, token1: Pick<Token, 'id' | 'name' | 'symbol'> }
     )>>, burns: Array<Maybe<(
       Pick<Burn, 'id' | 'origin' | 'amountUSD' | 'amount0' | 'amount1'>
@@ -6345,7 +6345,7 @@ export const getTransactionsDocument = gql`
         name
         symbol
       }
-      sender
+      origin
       amountUSD
       amount0
       amount1
@@ -6365,7 +6365,7 @@ export const getTransactionsDocument = gql`
         name
         symbol
       }
-      sender
+      origin
       amountUSD
       amount0
       amount1
