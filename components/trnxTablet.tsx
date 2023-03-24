@@ -157,9 +157,6 @@ const columns: ColumnsType = [
 const TransactionsTable = ({
   transactions,
   trnxLoading
-}: {
-  // transactions: Transaction[]
-  // trnxLoading?: boolean
 }): JSX.Element => {
 
   // const onChange = (pagination, filters) => {
@@ -192,20 +189,20 @@ const TransactionsTable = ({
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <h1 style={{ marginRight: 16 }}>Transactions</h1>
         <div style={{ marginBottom: 16 }}>
           <Button loading={trnxLoading}>Refresh</Button>
         </div>
       </div>
       <Table
-        loading={trnxLoading}
         columns={columns}
         dataSource={trx}
-        pagination={{ position: ['bottomCenter'] }}
+        loading={trnxLoading}
+        pagination={{ position: ["bottomCenter"] }}
       />
     </div>
-  )
+  );
 }
 
 export default TransactionsTable

@@ -33,7 +33,7 @@ export function useFetchTransactions () {
       .catch((error) => {
         console.log(error)
       })
-  };
+  }
 
   return { transactions, trnxLoading, refetchTransactions }
 }
