@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
+import { filter } from '@chakra-ui/react'
 import { Button, Table, Tooltip } from 'antd'
-import type { ColumnsType } from 'antd/es/table'
+import type { ColumnsType, TableProps } from 'antd/es/table'
 import Link from 'next/link'
 
 import formatTrxTime from '../utils/dateFormat'
@@ -95,7 +96,22 @@ const columns: ColumnsType = [
     dataIndex: 'type',
     key: 'type',
     align: 'center',
-    width: 100
+    width: 100,
+    filters: [
+      {
+        text: 'Mints',
+        value: 'mints'
+      },
+      {
+        text: 'Swaps',
+        value: 'swaps'
+      },
+      {
+        text: 'Burns',
+        value: 'burns'
+      }
+    ],
+    onFilter: (value: string, record) => record.type.includes(value)
   },
   {
     title: 'Token Value',
@@ -145,12 +161,15 @@ const TransactionsTable = ({
   // transactions: Transaction[]
   // trnxLoading?: boolean
 }): JSX.Element => {
-  console.log(transactions)
+
+  // const onChange = (pagination, filters) => {
+  //   console.log('params', pagination, filters)
+  // }
+
   const trxFiltered = transactionFilter(transactions)
 
-  console.log(trxFiltered)
   const trx = trxFiltered.map((trnxData, index) => {
-    console.log(trnxData)
+   
     return {
       type: trnxData.type,
       //  hash: trnxData.transaction[0].origin,

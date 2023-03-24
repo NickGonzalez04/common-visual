@@ -44,13 +44,11 @@ export default function transactionFilter (data: Data): TransactionResponse[] {
 
   for (const transaction of data) {
     for (const key in transaction) {
-      // console.log('key1', transaction[key]);
       if (Array.isArray(transaction[key]) && transaction[key].length > 0) {
-        console.log('key2', transaction)
         keysWithNonEmptyArrays.push({ type: key, timestamp: transaction.timestamp, transaction: transaction[key] })
       }
     }
   }
-  console.log('keysWithNonEmptyArrays', keysWithNonEmptyArrays)
+
   return keysWithNonEmptyArrays
 }
