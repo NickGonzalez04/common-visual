@@ -18,28 +18,28 @@ const columns: ColumnsType<PoolDataType> = [
     title: '#',
     dataIndex: 'index',
     key: 'index',
-    width: 50
+    width: 50,
   },
   {
     title: 'Pool',
     dataIndex: 'pool',
     key: 'pool',
     align: 'center',
-    width: 200
+    width: 200,
   },
   {
     title: 'TVL',
     dataIndex: 'tvl',
     key: 'tvl',
     align: 'right',
-    width: 300
+    width: 300,
   },
   {
     title: 'Volume 24hr',
     dataIndex: 'volume',
     key: 'volume',
     align: 'right',
-    width: 300
+    width: 300,
   },
 ]
 
@@ -47,7 +47,7 @@ const columns: ColumnsType<PoolDataType> = [
 const PoolsTable = ({
   topPools,
   poolsLoading,
-  refetchTopPools
+  refetchTopPools,
 }: {
   topPools: any
   poolsLoading: boolean
@@ -62,18 +62,18 @@ const PoolsTable = ({
           (pool.token0.symbol === 'WETH'
             ? 'ETH'
             : pool.token0.symbol === 'WBTC'
-              ? 'BTC'
-              : pool.token0.symbol) +
+            ? 'BTC'
+            : pool.token0.symbol) +
           '/' +
           (pool.token1.symbol === 'WETH'
             ? 'ETH'
             : pool.token1.symbol === 'WBTC'
-              ? 'BTC'
-              : pool.token1.symbol),
+            ? 'BTC'
+            : pool.token1.symbol),
         tvl: priceFormat(pool.totalValueLockedUSD),
-        volume: priceFormat(pool.poolDayData[0].volumeUSD)
+        volume: priceFormat(pool.poolDayData[0].volumeUSD),
       }
-    })
+    }),
   ]
 
   return (

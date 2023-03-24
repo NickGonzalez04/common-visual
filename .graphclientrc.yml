@@ -1,7 +1,7 @@
 # .graphclientrc.yml
 sources:
   - name: uniswapv3
-    handler: 
+    handler:
       graphql:
         endpoint: https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3
     transforms:

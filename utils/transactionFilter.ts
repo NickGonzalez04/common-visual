@@ -34,7 +34,6 @@ interface TransactionResponse {
   type: string
   timestamp: string
   transaction: any
-
 }
 
 // This function is used to filter transactions based on the type of transaction executed
@@ -46,7 +45,11 @@ export default function transactionFilter (data: Data): TransactionResponse[] {
   for (const transaction of data) {
     for (const key in transaction) {
       if (Array.isArray(transaction[key]) && transaction[key].length > 0) {
-        keysWithNonEmptyArrays.push({ type: key, timestamp: transaction.timestamp, transaction: transaction[key] })
+        keysWithNonEmptyArrays.push({
+          type: key,
+          timestamp: transaction.timestamp,
+          transaction: transaction[key],
+        })
       }
     }
   }

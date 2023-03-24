@@ -15,7 +15,7 @@ const headerStyle: React.CSSProperties = {
   height: 142,
   paddingInline: 50,
   lineHeight: '120px',
-  backgroundColor: 'rgb(31, 33, 40)'
+  backgroundColor: 'rgb(31, 33, 40)',
 }
 
 const contentStyle: React.CSSProperties = {
@@ -44,7 +44,7 @@ const PageLayout = ({
   refetchTokens,
   transactions,
   trnxLoading,
-  refetchTransactions
+  refetchTransactions,
 }: any): JSX.Element => {
   const items: TabsProps['items'] = [
     {

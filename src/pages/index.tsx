@@ -5,7 +5,7 @@ import { useFetchTopPools } from '../../hooks/useFetchTopPools'
 import { useFetchTokens } from '../../hooks/useFetchTokens'
 import { useFetchTransactions } from '../../hooks/useFetchTransactions'
 
-export default function Home (): JSX.Element {
+export default function Home(): JSX.Element {
   const { topPools, poolsLoading, refetchTopPools } = useFetchTopPools()
   const { tokens, isLoading, refetchTokens } = useFetchTokens()
   const { transactions, trnxLoading, refetchTransactions } =

@@ -8,7 +8,6 @@ import formatTrxTime from '../utils/dateFormat'
 import priceFormat from '../utils/priceFormat'
 import transactionFilter from './../utils/transactionFilter'
 
-
 interface TransactionTypeData {
   key: string
   index: number
@@ -96,18 +95,18 @@ const columns: ColumnsType = [
     filters: [
       {
         text: 'Mints',
-        value: 'mints'
+        value: 'mints',
       },
       {
         text: 'Swaps',
-        value: 'swaps'
+        value: 'swaps',
       },
       {
         text: 'Burns',
-        value: 'burns'
-      }
+        value: 'burns',
+      },
     ],
-    onFilter: (value: string, record) => record.type.includes(value)
+    onFilter: (value: string, record) => record.type.includes(value),
   },
   {
     title: 'Token Value',
@@ -149,37 +148,33 @@ const columns: ColumnsType = [
     dataIndex: 'timestamp',
     key: 'timestamp',
     align: 'right',
-    width: 200
-  }
-];
-const TransactionsTable = ({
-  transactions,
-  trnxLoading
-}): JSX.Element => {
+    width: 200,
+  },
+]
+const TransactionsTable = ({ transactions, trnxLoading }): JSX.Element => {
   const trxFiltered = transactionFilter(transactions)
 
   const trx = trxFiltered.map((trnxData) => {
-
     return {
       type: trnxData.type,
       //  hash: trnxData.transaction[0].origin,
       amountUSD: priceFormat(trnxData.transaction[0].amountUSD),
       amountToken0:
         Math.abs(trnxData.transaction[0].amount0).toFixed(2) +
-        " " +
+        ' ' +
         trnxData.transaction[0].token0.symbol,
       amountToken1:
         Math.abs(trnxData.transaction[0].amount1).toFixed(2) +
-        " " +
+        ' ' +
         trnxData.transaction[0].token1.symbol,
       account: trnxData.transaction[0].origin,
-      timestamp: formatTrxTime(trnxData.timestamp),
-    };
+      timestamp: formatTrxTime(trnxData.timestamp)
+    }
   })
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h1 style={{ marginRight: 16 }}>Transactions</h1>
         <div style={{ marginBottom: 16 }}>
           <Button loading={trnxLoading}>Refresh</Button>
@@ -189,10 +184,10 @@ const TransactionsTable = ({
         columns={columns}
         dataSource={trx}
         loading={trnxLoading}
-        pagination={{ position: ["bottomCenter"] }}
+        pagination={{ position: ['bottomCenter'] }}
       />
     </div>
-  );
+  )
 }
 
 export default TransactionsTable

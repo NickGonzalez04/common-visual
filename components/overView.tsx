@@ -31,7 +31,7 @@ any): JSX.Element => {
         // refetchTransactions={refetchTransactions}
       />
     </div>
-  );
-};
+  )
+}
 
-export default OverView;
+export default OverView

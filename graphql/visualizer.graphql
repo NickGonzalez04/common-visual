@@ -1,44 +1,48 @@
 query getTopPoolsByTVL {
-    pools(orderBy: totalValueLockedUSD, 
-    orderDirection: desc, 
+  pools(
+    orderBy: totalValueLockedUSD
+    orderDirection: desc
     first: 50
-    where: { volumeUSD_gt: 10000, totalValueLockedUSD_gt: 1000000}) {
-        token0 {
-            id
-            symbol
-            name
-        }
-        token1 {
-            id
-            symbol
-            name
-        }
-        id
-        totalValueLockedUSD
-        poolDayData(first: 1, orderBy: date, orderDirection: desc) {
-            id
-            volumeUSD
-        }
+    where: { volumeUSD_gt: 10000, totalValueLockedUSD_gt: 1000000 }
+  ) {
+    token0 {
+      id
+      symbol
+      name
     }
+    token1 {
+      id
+      symbol
+      name
+    }
+    id
+    totalValueLockedUSD
+    poolDayData(first: 1, orderBy: date, orderDirection: desc) {
+      id
+      volumeUSD
+    }
+  }
 }
 
 query getTokens {
-    tokens(first: 100, 
-    orderBy: totalValueLockedUSD, 
+  tokens(
+    first: 100
+    orderBy: totalValueLockedUSD
     orderDirection: desc
-    where: { volumeUSD_gt: 10000, totalValueLockedUSD_gt: 1000000 }) {
-        id
-        symbol
-        name
-        totalValueLockedUSD
-        volumeUSD
-        tokenDayData(first: 1, orderBy: date, orderDirection: desc) {
-            priceUSD
-            volumeUSD
-            open
-            close  
-        }
+    where: { volumeUSD_gt: 10000, totalValueLockedUSD_gt: 1000000 }
+  ) {
+    id
+    symbol
+    name
+    totalValueLockedUSD
+    volumeUSD
+    tokenDayData(first: 1, orderBy: date, orderDirection: desc) {
+      priceUSD
+      volumeUSD
+      open
+      close
     }
+  }
 }
 
 query getTransactions {

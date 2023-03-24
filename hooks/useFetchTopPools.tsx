@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import {
   execute,
   getTopPoolsByTVLDocument,
-  type getTopPoolsByTVLQuery
+  type getTopPoolsByTVLQuery,
 } from '../.graphclient'
 
 export interface Pools {
@@ -27,7 +27,7 @@ export interface Pools {
   totalValueLocked: string
 }
 
-export function useFetchTopPools () {
+export function useFetchTopPools() {
   const [topPools, setTopPools] = useState<getTopPoolsByTVLQuery[]>([])
   const [poolsLoading, setPoolsLoading] = useState<boolean>(false)
 
