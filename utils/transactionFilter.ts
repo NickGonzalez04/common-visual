@@ -43,7 +43,6 @@ interface TransactionResponse {
 export default function transactionFilter (data: Data): TransactionResponse[] {
   const keysWithNonEmptyArrays: TransactionResponse[] = []
 
-  console.log(data)
   for (const transaction of data) {
     for (const key in transaction) {
       if (Array.isArray(transaction[key]) && transaction[key].length > 0) {
