@@ -6327,7 +6327,7 @@ export const getTokensDocument = gql`
     ` as unknown as DocumentNode<getTokensQuery, getTokensQueryVariables>;
 export const getTransactionsDocument = gql`
     query getTransactions {
-  transactions(first: 10, orderBy: timestamp, orderDirection: desc) {
+  transactions(first: 100, orderBy: timestamp, orderDirection: desc) {
     id
     timestamp
     mints {

@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import { Button, Table, Tooltip } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
-import { type Transaction } from '../types'
-// import { useFetchTransactions } from '../../hooks/useFetchTransactions'
 import Link from 'next/link'
-// import formatTrxTime from '../../utils/dateFormat'
+
+import formatTrxTime from '../utils/dateFormat'
 import priceFormat from '../utils/priceFormat'
 import transactionFilter from './../utils/transactionFilter'
-import { color } from 'framer-motion'
+
 
 interface TransactionTypeData {
   key: string
@@ -95,28 +95,28 @@ const columns: ColumnsType = [
     dataIndex: 'type',
     key: 'type',
     align: 'center',
-    width: 100,
+    width: 100
   },
   {
     title: 'Token Value',
     dataIndex: 'amountUSD',
     key: 'amountUSD',
     align: 'right',
-    width: 150,
+    width: 150
   },
   {
     title: 'Token Amount',
     dataIndex: 'amountToken0',
     key: 'amountToken0',
     align: 'right',
-    width: 150,
+    width: 150
   },
   {
     title: 'Token Amount',
     dataIndex: 'amountToken1',
     key: 'amountToken1',
     align: 'right',
-    width: 150,
+    width: 150
   },
   {
     title: 'Account',
@@ -129,6 +129,13 @@ const columns: ColumnsType = [
         <Link href={`https://etherscan.io/address/${sender}`}>{sender}</Link>
       </Tooltip>
     )
+  },
+  {
+    title: 'Time Stamp',
+    dataIndex: 'timestamp',
+    key: 'timestamp',
+    align: 'right',
+    width: 200
   }
 ];
 const TransactionsTable = ({
@@ -156,14 +163,13 @@ const TransactionsTable = ({
         Math.abs(trnxData.transaction[0].amount1).toFixed(2) +
         ' ' +
         trnxData.transaction[0].token1.symbol,
-      sender: 
-          `${trnxData.transaction[0].id.substring(0, 6) +
+      sender:
+          `${trnxData.transaction[0].id.substring(0, 4) +
             '...' +
             trnxData.transaction[0].id.substring(38, 42).toLowerCase()}`,
-    };
+      timestamp: formatTrxTime(trnxData.timestamp)
+    }
   })
-
-
 
   return (
     <div>

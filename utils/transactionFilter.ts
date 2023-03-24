@@ -31,6 +31,7 @@ interface Data {
 
 interface TransactionResponse {
   type: string
+  timestamp: string
   transaction: any
 
 }
@@ -41,13 +42,12 @@ interface TransactionResponse {
 export default function transactionFilter (data: Data): TransactionResponse[] {
   const keysWithNonEmptyArrays: TransactionResponse[] = []
 
-  console.log('data', data)
   for (const transaction of data) {
     for (const key in transaction) {
       // console.log('key1', transaction[key]);
       if (Array.isArray(transaction[key]) && transaction[key].length > 0) {
-        // console.log('key2', key);
-        keysWithNonEmptyArrays.push({ type: key, transaction: transaction[key] })
+        console.log('key2', transaction)
+        keysWithNonEmptyArrays.push({ type: key, timestamp: transaction.timestamp, transaction: transaction[key] })
       }
     }
   }
